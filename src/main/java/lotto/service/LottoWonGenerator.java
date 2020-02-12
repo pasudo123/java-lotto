@@ -1,6 +1,6 @@
 package lotto.service;
 
-import lotto.dto.Money;
+import lotto.Money;
 import lotto.model.Lottos;
 
 public class LottoGenerator {
