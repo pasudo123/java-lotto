@@ -15,6 +15,7 @@ public final class Won implements Money {
         this.won = Integer.parseInt(money);
     }
 
+    @Override
     public int get() {
         return won;
     }
@@ -26,7 +27,6 @@ public final class Won implements Money {
     }
 
     private void negativeCheck(final String money) {
-
         if(Integer.parseInt(money) < 0) {
             throw new IllegalArgumentException("로또 구입 금액은 음수가 될 수 없습니다.");
         }

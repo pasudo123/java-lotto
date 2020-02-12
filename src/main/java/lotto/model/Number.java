@@ -14,7 +14,7 @@ final class Number {
                 .nextInt(INCLUDE_FROM_NUMBER, EXCLUDE_TO_NUMBER);
     }
 
-    public int get(){
+    public Integer get(){
         return number;
     }
 }

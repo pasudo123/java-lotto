@@ -1,10 +1,12 @@
 package lotto.model;
 
+import lotto.service.LottoAdapter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-final class Lottos {
+public final class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
@@ -19,5 +21,9 @@ final class Lottos {
 
     public int getCount(){
         return lottos.size();
+    }
+
+    public LottoAdapter getLottoAdapter(){
+        return new LottoAdapter(lottos);
     }
 }

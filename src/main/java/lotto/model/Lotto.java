@@ -3,19 +3,29 @@ package lotto.model;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-final class Lotto {
+public final class Lotto {
+
+    private static final int IN_START_NUMBER = 0;
+    private static final int IN_END_NUMBER = 6;
 
     private final List<Number> lotto = new ArrayList<>();
 
     private Lotto(){
-        IntStream.range(0, 7)
+        IntStream.range(IN_START_NUMBER, IN_END_NUMBER)
                 .forEach(i -> lotto.add(new Number()));
         Collections.shuffle(lotto);
     }
 
     public static Lotto create(){
         return new Lotto();
+    }
+
+    public List<Integer> getNumbers(){
+        return lotto.stream()
+                .map(Number::get)
+                .collect(Collectors.toList());
     }
 }

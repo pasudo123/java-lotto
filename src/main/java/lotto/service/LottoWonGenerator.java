@@ -3,11 +3,11 @@ package lotto.service;
 import lotto.Money;
 import lotto.model.Lottos;
 
-public class LottoGenerator {
+public class LottoWonGenerator {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoGenerator(){}
+    private LottoWonGenerator(){}
 
     public static Lottos generate(final Money money) {
         return Lottos.create(getCountByMoney(money));
