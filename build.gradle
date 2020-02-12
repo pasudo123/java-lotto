@@ -1,17 +1,28 @@
-apply plugin: 'java'
-apply plugin: 'eclipse'
+plugins {
+    id 'org.springframework.boot' version '2.2.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'java'
+}
 
-version = '1.0.0'
-sourceCompatibility = 1.8
+group = 'com.team-zunior'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile('com.sparkjava:spark-core:2.6.0')
-    compile('com.sparkjava:spark-template-handlebars:2.5.5')
-	compile('ch.qos.logback:logback-classic:1.2.3')
-    testCompile('junit:junit:4.12')
-    testCompile('org.assertj:assertj-core:3.9.0')
+
+    // https://mvnrepository.com/artifact/org.apache.commons/commons-lang3
+    compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.0'
+
+
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+    }
+}
+
+test {
+    useJUnitPlatform()
 }
