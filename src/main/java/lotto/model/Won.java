@@ -1,21 +1,22 @@
-package lotto.dto;
+package lotto.model;
 
+import lotto.Money;
 import org.apache.commons.lang3.StringUtils;
 
-final class Money {
+public final class Won implements Money {
 
-    private int money;
+    private int won;
 
-    Money(final String money) {
+    public Won(final String money) {
 
         this.nullOrEmptyCheck(money);
         this.negativeCheck(money);
 
-        this.money = Integer.parseInt(money);
+        this.won = Integer.parseInt(money);
     }
 
     public int get() {
-        return money;
+        return won;
     }
 
     private void nullOrEmptyCheck(final String money) {
@@ -33,6 +34,6 @@ final class Money {
 
     @Override
     public String toString(){
-        return String.valueOf(money);
+        return String.valueOf(won);
     }
 }
