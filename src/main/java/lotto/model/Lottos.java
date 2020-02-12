@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Lottos {
+final class Lottos {
 
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos = new ArrayList<>();
 
     private Lottos(final int count){
         IntStream.rangeClosed(1, count)

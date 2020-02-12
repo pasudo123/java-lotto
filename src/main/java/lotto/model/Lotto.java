@@ -5,9 +5,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Lotto {
+final class Lotto {
 
-    private List<Number> lotto = new ArrayList<>();
+    private final List<Number> lotto = new ArrayList<>();
 
     private Lotto(){
         IntStream.range(0, 7)

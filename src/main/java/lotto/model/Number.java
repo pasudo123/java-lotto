@@ -2,7 +2,7 @@ package lotto.model;
 
 import java.util.concurrent.ThreadLocalRandom;
 
-public class Number {
+final class Number {
 
     private static final int INCLUDE_FROM_NUMBER = 0;
     private static final int EXCLUDE_TO_NUMBER = 46;

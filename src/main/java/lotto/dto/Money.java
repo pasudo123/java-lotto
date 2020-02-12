@@ -2,11 +2,11 @@ package lotto.dto;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class Money {
+final class Money {
 
     private int money;
 
-    public Money(final String money) {
+    Money(final String money) {
 
         this.nullOrEmptyCheck(money);
         this.negativeCheck(money);
@@ -14,7 +14,7 @@ public class Money {
         this.money = Integer.parseInt(money);
     }
 
-    int get() {
+    public int get() {
         return money;
     }
 
@@ -29,6 +29,10 @@ public class Money {
         if(Integer.parseInt(money) < 0) {
             throw new IllegalArgumentException("로또 구입 금액은 음수가 될 수 없습니다.");
         }
+    }
 
+    @Override
+    public String toString(){
+        return String.valueOf(money);
     }
 }
