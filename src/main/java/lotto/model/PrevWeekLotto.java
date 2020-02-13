@@ -22,6 +22,8 @@ public class PrevWeekLotto {
 
         final String newLine = removeWhiteSpace(line);
 
+        // TODO 동일번호 들어왔을 경우 체크
+
         numbers = Arrays.stream(newLine.split(COMMA))
                 .map(Integer::new)
                 .collect(Collectors.toList());

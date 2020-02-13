@@ -14,6 +14,9 @@ public final class Lotto {
     private final List<Number> lotto = new ArrayList<>();
 
     private Lotto(){
+
+        // TODO 동일번호 들어왔을 경우 체크.
+
         IntStream.range(IN_START_NUMBER, IN_END_NUMBER)
                 .forEach(i -> lotto.add(new Number()));
         Collections.shuffle(lotto);
