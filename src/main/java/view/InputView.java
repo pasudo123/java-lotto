@@ -1,9 +1,10 @@
 package view;
 
+import lotto.middle.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.PrevWeekLotto;
-import lotto.model.WinnerLotto;
-import lotto.model.Won;
+import lotto.service.LottoResultAdapter;
+import lotto.Won;
 import lotto.service.LottoAdapter;
 import lotto.service.LottoWonGenerator;
 
@@ -22,11 +23,11 @@ public class InputView {
 
     private InputView(){}
 
-    public static List<WinnerLotto> listen(){
+    public static LottoResult listen(){
         return new InputView().process();
     }
 
-    private List<WinnerLotto> process(){
+    private LottoResult process(){
 
         final Won won = askPurchaseMoney();
         final Lottos lottos = LottoWonGenerator.generate(won);
@@ -37,7 +38,7 @@ public class InputView {
 
         final PrevWeekLotto prevWeekLotto = askPrevWeekLottoNumber();
 
-        return lottos.getWinLottery(prevWeekLotto);
+        return new LottoResult(lottos.getResultLottery(prevWeekLotto));
     }
 
     private Won askPurchaseMoney(){

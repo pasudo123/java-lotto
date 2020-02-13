@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.service.LottoResultAdapter;
 import lotto.service.LottoAdapter;
 
 import java.util.ArrayList;
@@ -37,7 +38,7 @@ public final class Lottos {
         return new LottoAdapter(lottos);
     }
 
-    public List<WinnerLotto> getWinLottery(final PrevWeekLotto prevWeekLotto){
+    public List<LottoResultAdapter> getResultLottery(final PrevWeekLotto prevWeekLotto){
 
         this.nullCheck(prevWeekLotto);
 

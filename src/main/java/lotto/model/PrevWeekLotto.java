@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.service.LottoResultAdapter;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.Arrays;
@@ -8,9 +9,10 @@ import java.util.stream.Collectors;
 
 public class PrevWeekLotto {
 
+    private static final String WHITE_SPACE = "\\s";
+    private static final String SPACE = "";
     private static final String COMMA = ",";
     private static final int SIX = 6;
-    private static final int MINIMUM_MATCH_COUNT = 3;
     private final List<Integer> numbers;
 
     public PrevWeekLotto(final String line) {
@@ -18,9 +20,15 @@ public class PrevWeekLotto {
         nullCheck(line);
         lottoSizeCheck(line);
 
-        numbers = Arrays.stream(line.split(COMMA))
+        final String newLine = removeWhiteSpace(line);
+
+        numbers = Arrays.stream(newLine.split(COMMA))
                 .map(Integer::new)
                 .collect(Collectors.toList());
+    }
+
+    private String removeWhiteSpace(final String line) {
+        return line.replaceAll(WHITE_SPACE, SPACE);
     }
 
     private void nullCheck(final String line) {
@@ -37,12 +45,12 @@ public class PrevWeekLotto {
         }
     }
 
-    WinnerLotto getWinnerLotto(final List<Integer> myNumbers){
+    LottoResultAdapter getWinnerLotto(final List<Integer> myNumbers){
 
         final int matchCount = (int)myNumbers.stream()
                 .filter(numbers::contains)
                 .count();
 
-        return new WinnerLotto(matchCount, myNumbers);
+        return new LottoResultAdapter(matchCount, myNumbers);
     }
 }

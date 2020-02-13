@@ -1,6 +1,5 @@
-package lotto.model;
+package lotto;
 
-import lotto.Money;
 import org.apache.commons.lang3.StringUtils;
 
 public final class Won implements Money {
@@ -28,7 +27,7 @@ public final class Won implements Money {
 
     private void negativeCheck(final String money) {
         if(Integer.parseInt(money) <= 0) {
-            throw new IllegalArgumentException("들어온 금액이 음수 또는 0이기 때문에 로또를 구입할 수 없습니다.");
+            throw new IllegalArgumentException("들어온 금액이 음수 또는 0원 이기 때문에 로또를 구입할 수 없습니다.");
         }
     }
 
