@@ -1,13 +1,11 @@
 package view;
 
-import lotto.Money;
 import lotto.model.Lottos;
 import lotto.model.PrevWeekLotto;
 import lotto.model.WinnerLotto;
 import lotto.model.Won;
 import lotto.service.LottoAdapter;
 import lotto.service.LottoWonGenerator;
-import lotto.service.WeeklyLottoLottery;
 
 import java.util.List;
 import java.util.Scanner;
@@ -24,11 +22,11 @@ public class InputView {
 
     private InputView(){}
 
-    public static WinnerLotto listen(){
+    public static List<WinnerLotto> listen(){
         return new InputView().process();
     }
 
-    private WinnerLotto process(){
+    private List<WinnerLotto> process(){
 
         final Won won = askPurchaseMoney();
         final Lottos lottos = LottoWonGenerator.generate(won);
@@ -37,7 +35,9 @@ public class InputView {
         printMyLottoCount(lottoAdapter);
         printMyLottoList(lottoAdapter);
 
-        return lottos.getWinLottery(askPrevWeekLottoNumber());
+        final PrevWeekLotto prevWeekLotto = askPrevWeekLottoNumber();
+
+        return lottos.getWinLottery(prevWeekLotto);
     }
 
     private Won askPurchaseMoney(){

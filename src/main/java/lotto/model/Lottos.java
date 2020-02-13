@@ -37,15 +37,13 @@ public final class Lottos {
         return new LottoAdapter(lottos);
     }
 
-    public WinnerLotto getWinLottery(final PrevWeekLotto prevWeekLotto){
+    public List<WinnerLotto> getWinLottery(final PrevWeekLotto prevWeekLotto){
 
         this.nullCheck(prevWeekLotto);
 
-        final List<Lotto> winnerLottos = lottos.stream()
-                .filter(lotto -> prevWeekLotto.isPrize(lotto.getNumbers()))
+        return lottos.stream()
+                .map(lotto -> prevWeekLotto.getWinnerLotto(lotto.getNumbers()))
                 .collect(Collectors.toList());
-
-        return new WinnerLotto(winnerLottos);
     }
 
     private void nullCheck(final PrevWeekLotto prevWeekLotto) {

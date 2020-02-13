@@ -37,10 +37,12 @@ public class PrevWeekLotto {
         }
     }
 
-    public boolean isPrize(final List<Integer> myNumbers){
+    WinnerLotto getWinnerLotto(final List<Integer> myNumbers){
 
-        final long matchCount = myNumbers.stream().filter(numbers::contains).count();
+        final int matchCount = (int)myNumbers.stream()
+                .filter(numbers::contains)
+                .count();
 
-        return matchCount >= MINIMUM_MATCH_COUNT;
+        return new WinnerLotto(matchCount, myNumbers);
     }
 }
