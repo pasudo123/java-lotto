@@ -27,8 +27,8 @@ public final class Won implements Money {
     }
 
     private void negativeCheck(final String money) {
-        if(Integer.parseInt(money) < 0) {
-            throw new IllegalArgumentException("로또 구입 금액은 음수가 될 수 없습니다.");
+        if(Integer.parseInt(money) <= 0) {
+            throw new IllegalArgumentException("들어온 금액이 음수 또는 0이기 때문에 로또를 구입할 수 없습니다.");
         }
     }
 

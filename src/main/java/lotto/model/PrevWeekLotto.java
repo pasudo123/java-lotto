@@ -10,6 +10,7 @@ public class PrevWeekLotto {
 
     private static final String COMMA = ",";
     private static final int SIX = 6;
+    private static final int MINIMUM_MATCH_COUNT = 3;
     private final List<Integer> numbers;
 
     public PrevWeekLotto(final String line) {
@@ -32,7 +33,14 @@ public class PrevWeekLotto {
     private void lottoSizeCheck(final String line) {
 
         if(line.split(COMMA).length != SIX){
-            throw new IllegalArgumentException("지난 주 당첨 번호에 여섯자리 숫자가 입력되지 않았습니다.");
+            throw new IllegalArgumentException("지난 주 당첨 번호는 여섯개의 숫자가 입력되어야 합니다.");
         }
+    }
+
+    public boolean isPrize(final List<Integer> myNumbers){
+
+        final long matchCount = myNumbers.stream().filter(numbers::contains).count();
+
+        return matchCount >= MINIMUM_MATCH_COUNT;
     }
 }
