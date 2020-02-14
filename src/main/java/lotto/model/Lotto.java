@@ -8,17 +8,20 @@ import java.util.stream.IntStream;
 
 public final class Lotto {
 
-    private static final int IN_START_NUMBER = 0;
-    private static final int IN_END_NUMBER = 6;
+    private static final int ZERO = 0;
+    private static final int SIX = 6;
 
     private final List<Number> lotto = new ArrayList<>();
 
     private Lotto(){
 
-        // TODO 동일번호 들어왔을 경우 체크.
+        generateRandomLottoNumber();
 
-        IntStream.range(IN_START_NUMBER, IN_END_NUMBER)
-                .forEach(i -> lotto.add(new Number()));
+        while(isOverlap()){
+            lotto.clear();
+            generateRandomLottoNumber();
+        }
+
         Collections.shuffle(lotto);
     }
 
@@ -30,5 +33,18 @@ public final class Lotto {
         return lotto.stream()
                 .map(Number::get)
                 .collect(Collectors.toList());
+    }
+
+    private void generateRandomLottoNumber(){
+        IntStream.range(ZERO, SIX)
+                .forEach(i -> lotto.add(new Number()));
+    }
+
+    private boolean isOverlap(){
+
+        return SIX != lotto.stream()
+                .map(Number::get)
+                .collect(Collectors.toSet())
+                .size();
     }
 }
