@@ -67,8 +67,10 @@ class PrevWeekLottoTest {
 
     void constructorLottoRangeExceptionTest(final String line, final Integer notLottoNumber) {
 
+        // when
         Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line));
 
+        // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호는 로또 범위를 벗어났습니다."));
     }
 
@@ -81,8 +83,10 @@ class PrevWeekLottoTest {
     @DisplayName("로또번호에 동일한 숫자가 입력되었기 때문에 에러가 발생하였습니다.")
     void constructorOverlapExceptionTest(final String line, final Integer overlapNumber){
 
+        // when
         Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line));
 
+        // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호에 동일한 숫자가 입력되었습니다."));
     }
 }
