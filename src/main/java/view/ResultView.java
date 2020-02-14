@@ -1,6 +1,6 @@
 package view;
 
-import lotto.middle.LottoResult;
+import lotto.middleware.LottoResult;
 
 public class ResultView {
 

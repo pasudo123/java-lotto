@@ -1,9 +1,8 @@
 package view;
 
-import lotto.middle.LottoResult;
+import lotto.middleware.LottoResult;
 import lotto.model.Lottos;
 import lotto.model.PrevWeekLotto;
-import lotto.service.LottoResultAdapter;
 import lotto.Won;
 import lotto.service.LottoAdapter;
 import lotto.service.LottoWonGenerator;

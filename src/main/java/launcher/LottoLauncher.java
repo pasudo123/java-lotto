@@ -1,6 +1,6 @@
 package launcher;
 
-import lotto.middle.LottoResult;
+import lotto.middleware.LottoResult;
 import view.InputView;
 import view.ResultView;
 

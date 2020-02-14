@@ -1,7 +1,7 @@
 package lotto.service;
 
+import lotto.Won;
 import lotto.model.Lottos;
-import lotto.model.Won;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
