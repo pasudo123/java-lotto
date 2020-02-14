@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class LottoResult {
 
-    private static final int[] won = new int[]{0, 0, 0, 5000, 50000, 1500000, 2000000000};
+    private static final int[] MATCH_COMPENSATION = new int[]{0, 0, 0, 5000, 50000, 1500000, 2000000000};
 
     private static final int MINIMUM_MATCH_PRIZE = 3;
     private static final int MAXIMUM_MATCH_PRIZE = 6;
@@ -32,7 +32,7 @@ public class LottoResult {
     }
 
     public int getMoneyOnRate(final Integer rate) {
-        return won[rate];
+        return MATCH_COMPENSATION[rate];
     }
 
     public int getWinnerCountOnRate(final Integer rate){
