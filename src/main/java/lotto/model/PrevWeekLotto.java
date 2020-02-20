@@ -23,11 +23,11 @@ public class PrevWeekLotto {
     public PrevWeekLotto(final String line) {
 
         checkNull(line);
-        checkLottoSize(line);
 
         final String newLine = removeWhiteSpace(line);
         toNumbers(newLine);
 
+        checkLottoSize();
         checkOverLottoNumberRange();
         checkOverlap();
     }
@@ -43,9 +43,8 @@ public class PrevWeekLotto {
         }
     }
 
-    private void checkLottoSize(final String line) {
-
-        if(line.split(COMMA).length != SIX){
+    private void checkLottoSize() {
+        if(numbers.size() != SIX){
             throw new IllegalArgumentException("지난 주 당첨 번호는 여섯개의 숫자가 입력되어야 합니다.");
         }
     }
@@ -64,7 +63,7 @@ public class PrevWeekLotto {
 
     private void toNumbers(final String line){
         numbers = Arrays.stream(line.split(COMMA))
-                .map(Integer::new)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 

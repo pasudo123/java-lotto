@@ -14,13 +14,15 @@ public class LottoResult {
     private static final int MAXIMUM_MATCH_PRIZE = 6;
     private static final int LOTTO_PRICE = 1000;
 
-    private final Integer PURCHASE_WON;
+    private final Integer purchaseWon;
     private final List<LottoResultAdapter> winnerLotto;
     private Integer revenue;
 
     public LottoResult(final List<LottoResultAdapter> adapterList){
 
-        this.PURCHASE_WON = adapterList.size() * LOTTO_PRICE;
+        validate(adapterList);
+
+        this.purchaseWon = adapterList.size() * LOTTO_PRICE;
 
         this.winnerLotto = adapterList.stream()
                 .filter(LottoResultAdapter::isPrize)
@@ -28,7 +30,7 @@ public class LottoResult {
 
         Collections.sort(winnerLotto);
 
-        this.setRevenue();
+        this.initRevenue();
     }
 
     public int getMoneyOnRate(final Integer rate) {
@@ -42,7 +44,7 @@ public class LottoResult {
                 .count();
     }
 
-    private void setRevenue(){
+    private void initRevenue(){
 
         int revenue = 0;
 
@@ -50,10 +52,16 @@ public class LottoResult {
             revenue += (this.getWinnerCountOnRate(p) * this.getMoneyOnRate(p));
         }
 
-        this.revenue = (revenue / PURCHASE_WON);
+        this.revenue = (revenue / purchaseWon);
     }
 
     public int getRevenue(){
         return revenue;
+    }
+
+    private void validate(final List<LottoResultAdapter> adapterList){
+        if(adapterList == null || adapterList.size() == 0){
+            throw new IllegalArgumentException("구입한 로또가 존재하지 않습니다.");
+        }
     }
 }

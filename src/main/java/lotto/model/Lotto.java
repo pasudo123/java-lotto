@@ -21,8 +21,6 @@ public final class Lotto {
             lotto.clear();
             generateRandomLottoNumber();
         }
-
-        Collections.shuffle(lotto);
     }
 
     public static Lotto create(){
