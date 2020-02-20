@@ -15,8 +15,8 @@ public class ResultView {
         for(int rate = 3; rate <= 6; rate++){
             System.out.println(String.format(MATCH_FORMAT,
                     rate,
-                    lottoResult.getMoneyOnRate(rate),
-                    lottoResult.getWinnerCountOnRate(rate)));
+                    lottoResult.getMoneyByPrize(rate),
+                    lottoResult.getWinnerCountByPrize(rate)));
         }
 
         System.out.println("총 수익률은 " + lottoResult.getRevenue() + "% 입니다.");

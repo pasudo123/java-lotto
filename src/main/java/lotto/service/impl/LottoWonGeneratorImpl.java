@@ -1,15 +1,15 @@
-package lotto.service;
+package lotto.service.impl;
 
 import lotto.Money;
 import lotto.model.Lottos;
+import lotto.service.LottoGenerator;
 
-public class LottoWonGenerator {
+public class LottoWonGeneratorImpl implements LottoGenerator {
 
     private static final int LOTTO_PRICE = 1000;
 
-    private LottoWonGenerator(){}
-
-    public static Lottos generate(final Money money) {
+    @Override
+    public Lottos generate(final Money money) {
         return Lottos.create(getCountByMoney(money));
     }
 

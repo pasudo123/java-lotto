@@ -7,7 +7,6 @@ public final class Won implements Money {
     private int won;
 
     public Won(final String money) {
-
         this.nullOrEmptyCheck(money);
         this.negativeCheck(money);
 

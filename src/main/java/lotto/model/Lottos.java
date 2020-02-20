@@ -12,8 +12,6 @@ public final class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    private Lottos(){}
-
     private Lottos(final int count){
         countCheck(count);
         IntStream.rangeClosed(1, count)

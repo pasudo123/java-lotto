@@ -17,8 +17,8 @@ public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
         return this.matchCount >= THREE;
     }
 
-    public boolean isRateByRate(final int rate){
-        return this.matchCount == rate;
+    public boolean isEqualMatchCount(final int prize){
+        return this.matchCount == prize;
     }
 
     @Override

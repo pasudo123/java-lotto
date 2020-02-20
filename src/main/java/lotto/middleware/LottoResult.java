@@ -33,14 +33,13 @@ public class LottoResult {
         this.initRevenue();
     }
 
-    public int getMoneyOnRate(final Integer rate) {
-        return MATCH_COMPENSATION[rate];
+    public int getMoneyByPrize(final Integer prize) {
+        return MATCH_COMPENSATION[prize];
     }
 
-    public int getWinnerCountOnRate(final Integer rate){
-
+    public int getWinnerCountByPrize(final Integer prize){
         return (int) winnerLotto.stream()
-                .filter(winnerLotto -> winnerLotto.isRateByRate(rate))
+                .filter(winnerLotto -> winnerLotto.isEqualMatchCount(prize))
                 .count();
     }
 
@@ -48,8 +47,8 @@ public class LottoResult {
 
         int revenue = 0;
 
-        for(int p = MINIMUM_MATCH_PRIZE; p <= MAXIMUM_MATCH_PRIZE; p++){
-            revenue += (this.getWinnerCountOnRate(p) * this.getMoneyOnRate(p));
+        for(int prize = MINIMUM_MATCH_PRIZE; prize <= MAXIMUM_MATCH_PRIZE; prize++){
+            revenue += (this.getWinnerCountByPrize(prize) * this.getMoneyByPrize(prize));
         }
 
         this.revenue = (revenue / purchaseWon);

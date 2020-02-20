@@ -5,8 +5,10 @@ import lotto.model.Lottos;
 import lotto.model.PrevWeekLotto;
 import lotto.Won;
 import lotto.service.LottoAdapter;
-import lotto.service.LottoWonGenerator;
+import lotto.service.LottoGenerator;
+import lotto.service.impl.LottoWonGeneratorImpl;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.StringJoiner;
@@ -29,7 +31,7 @@ public class InputView {
     private LottoResult process(){
 
         final Won won = askPurchaseMoney();
-        final Lottos lottos = LottoWonGenerator.generate(won);
+        final Lottos lottos = new LottoWonGeneratorImpl().generate(won);
         final LottoAdapter lottoAdapter = lottos.getLottoAdapter();
 
         printMyLottoCount(lottoAdapter);
@@ -56,12 +58,7 @@ public class InputView {
         final StringBuilder sb = new StringBuilder();
 
         for(List<Integer> integers : myLottoList) {
-
-            final StringJoiner joiner = new StringJoiner(COMMA, OpenBracket, CloseBracket);
-
-            integers.forEach(integer -> joiner.add(String.valueOf(integer)));
-
-            sb.append(joiner.toString());
+            sb.append(Arrays.toString(integers.toArray()));
             sb.append(NEW_LINE);
         }
 
