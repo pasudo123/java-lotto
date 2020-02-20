@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 public final class Lotto {
 
-    private static final int ZERO = 0;
-    private static final int SIX = 6;
+    private static final int LOTTO_MINIMUM_COUNT = 0;
+    private static final int LOTTO_MAXIMUM_COUNT = 6;
 
     private final List<Number> lotto = new ArrayList<>();
 
@@ -34,13 +34,13 @@ public final class Lotto {
     }
 
     private void generateRandomLottoNumber(){
-        IntStream.range(ZERO, SIX)
+        IntStream.range(LOTTO_MINIMUM_COUNT, LOTTO_MAXIMUM_COUNT)
                 .forEach(i -> lotto.add(new Number()));
     }
 
     private boolean isOverlap(){
 
-        return SIX != lotto.stream()
+        return LOTTO_MAXIMUM_COUNT != lotto.stream()
                 .map(Number::get)
                 .collect(Collectors.toSet())
                 .size();

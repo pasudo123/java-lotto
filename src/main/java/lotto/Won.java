@@ -7,8 +7,7 @@ public final class Won implements Money {
     private int won;
 
     public Won(final String money) {
-        this.nullOrEmptyCheck(money);
-        this.negativeCheck(money);
+        this.validate(money);
 
         this.won = Integer.parseInt(money);
     }
@@ -16,6 +15,11 @@ public final class Won implements Money {
     @Override
     public int get() {
         return won;
+    }
+
+    private void validate(final String money) {
+        this.nullOrEmptyCheck(money);
+        this.negativeCheck(money);
     }
 
     private void nullOrEmptyCheck(final String money) {

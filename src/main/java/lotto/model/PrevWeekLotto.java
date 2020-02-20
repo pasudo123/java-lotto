@@ -13,8 +13,8 @@ public class PrevWeekLotto {
     private static final String WHITE_SPACE = "\\s";
     private static final String SPACE = "";
     private static final String COMMA = ",";
-    private static final int MIN_NUMBER = 1;
-    private static final int MAX_NUMBER = 45;
+    private static final int LOTTO_MIN_NUMBER = 1;
+    private static final int LOTTO_MAX_NUMBER = 45;
 
     private static final int SIX = 6;
 
@@ -50,7 +50,7 @@ public class PrevWeekLotto {
     }
 
     private void checkOverLottoNumberRange(){
-        if(numbers.stream().anyMatch(integer -> MIN_NUMBER > integer || integer > MAX_NUMBER)){
+        if(numbers.stream().anyMatch(number -> LOTTO_MIN_NUMBER > number || number > LOTTO_MAX_NUMBER)){
             throw new IllegalArgumentException("지난 주 당첨 번호는 로또 범위를 벗어났습니다.");
         }
     }

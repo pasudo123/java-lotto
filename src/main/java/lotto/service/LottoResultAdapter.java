@@ -4,7 +4,7 @@ import java.util.List;
 
 public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
 
-    private static final int THREE = 3;
+    private static final int MINIMUM_PRIZE_COUNT = 3;
     private final int matchCount;
     private final List<Integer> myLottos;
 
@@ -14,7 +14,7 @@ public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
     }
 
     public boolean isPrize(){
-        return this.matchCount >= THREE;
+        return this.matchCount >= MINIMUM_PRIZE_COUNT;
     }
 
     public boolean isEqualMatchCount(final int prize){
