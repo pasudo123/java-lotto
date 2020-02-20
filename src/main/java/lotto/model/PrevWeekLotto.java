@@ -27,9 +27,7 @@ public class PrevWeekLotto {
         final String newLine = removeWhiteSpace(line);
         toNumbers(newLine);
 
-        checkLottoSize();
-        checkOverLottoNumberRange();
-        checkOverlap();
+        postValidateCheck();
     }
 
     private String removeWhiteSpace(final String line) {
@@ -41,6 +39,12 @@ public class PrevWeekLotto {
         if(StringUtils.isEmpty(line)) {
             throw new IllegalArgumentException("지난 주 당첨 번호에 널 또는 공백이 입력되었습니다.");
         }
+    }
+
+    private void postValidateCheck(){
+        checkLottoSize();
+        checkOverLottoNumberRange();
+        checkOverlap();
     }
 
     private void checkLottoSize() {
@@ -73,6 +77,6 @@ public class PrevWeekLotto {
                 .filter(numbers::contains)
                 .count();
 
-        return new LottoResultAdapter(matchCount, myNumbers);
+        return new LottoResultAdapter(matchCount);
     }
 }

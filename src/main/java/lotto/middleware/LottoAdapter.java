@@ -1,4 +1,4 @@
-package lotto.service;
+package lotto.middleware;
 
 import lotto.model.Lotto;
 

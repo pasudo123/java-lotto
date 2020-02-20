@@ -1,16 +1,12 @@
 package lotto.service;
 
-import java.util.List;
-
 public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
 
     private static final int MINIMUM_PRIZE_COUNT = 3;
     private final int matchCount;
-    private final List<Integer> myLottos;
 
-    public LottoResultAdapter(final int matchCount, final List<Integer> myLottos){
+    public LottoResultAdapter(final int matchCount){
         this.matchCount = matchCount;
-        this.myLottos = myLottos;
     }
 
     public boolean isPrize(){

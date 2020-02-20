@@ -1,7 +1,9 @@
-package lotto.service;
+package lotto.service.impl;
 
 import lotto.Won;
 import lotto.model.Lottos;
+import lotto.service.LottoGenerator;
+import lotto.service.impl.LottoWonGeneratorImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -20,9 +22,10 @@ class LottoWonGeneratorTest {
     public void generateTest(final Won won, final int lottoCount){
 
         // given
+        LottoGenerator lottoGenerator = new LottoWonGeneratorImpl();
 
         // when
-        final Lottos lottos = LottoWonGenerator.generate(won);
+        final Lottos lottos = lottoGenerator.generate(won);
 
         // then
         assertThat(lottos.getCount()).isEqualTo(lottoCount);
@@ -31,8 +34,6 @@ class LottoWonGeneratorTest {
     static Stream<Arguments> provideWon(){
 
         return Stream.of(
-            Arguments.of(new Won("1"), 0),
-            Arguments.of(new Won("999"), 0),
             Arguments.of(new Won("1000"), 1),
             Arguments.of(new Won("1001"), 1),
             Arguments.of(new Won("5000"), 5),

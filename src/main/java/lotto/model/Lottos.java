@@ -1,7 +1,7 @@
 package lotto.model;
 
 import lotto.service.LottoResultAdapter;
-import lotto.service.LottoAdapter;
+import lotto.middleware.LottoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
