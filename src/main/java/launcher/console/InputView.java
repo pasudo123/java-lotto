@@ -19,8 +19,13 @@ public class InputView {
         return new Won(SCANNER.nextLine());
     }
 
-    public static PrevWeekLotto inputPrevWeekLottoNumber(){
+    public static String inputPrevWeekLottoNumber(){
         System.out.println("지난 주 당첨 번호를 입력해주세요.");
-        return new PrevWeekLotto(SCANNER.nextLine());
+        return SCANNER.nextLine();
+    }
+
+    public static Integer inputPrevWeekBunusNumber(){
+        System.out.println("보너스 볼을 입력해주세요.");
+        return SCANNER.nextInt();
     }
 }
