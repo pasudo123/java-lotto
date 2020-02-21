@@ -24,7 +24,7 @@ public class LottoConsoleLauncher {
         ResultView.printMyLottoList(lottoAdapter);
 
         final String line = InputView.inputPrevWeekLottoNumber();
-        final Integer bonusNumber = InputView.inputPrevWeekBunusNumber();
+        final Integer bonusNumber = InputView.inputPrevWeekBonusNumber();
         final PrevWeekLotto prevWeekLotto = new PrevWeekLotto(line, bonusNumber);
 
         final LottoResult lottoResult = new LottoResult(lottos.getResultLottery(prevWeekLotto));

@@ -24,7 +24,7 @@ public class InputView {
         return SCANNER.nextLine();
     }
 
-    public static Integer inputPrevWeekBunusNumber(){
+    public static Integer inputPrevWeekBonusNumber(){
         System.out.println("보너스 볼을 입력해주세요.");
         return SCANNER.nextInt();
     }
