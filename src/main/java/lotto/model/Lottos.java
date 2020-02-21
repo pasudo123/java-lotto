@@ -27,7 +27,7 @@ public final class Lottos {
             throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
         }
     }
-
+    
     public int getCount(){
         return lottos.size();
     }

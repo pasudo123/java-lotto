@@ -24,7 +24,7 @@ public class LottoAdapter {
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }
-
+    
     private void nullOrSizeZeroCheck(final List<Lotto> lottoList) {
         if(lottoList == null || lottoList.size() == 0) {
             throw new IllegalArgumentException("현재 내가 구입한 로또가 없습니다.");
