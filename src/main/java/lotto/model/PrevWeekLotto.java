@@ -27,7 +27,7 @@ public class PrevWeekLotto {
 
         final String newLine = line.replaceAll(WHITE_SPACE, SPACE);
         initNumbers(newLine);
-        initBonumNumber(bonusNumber);
+        initBonusNumber(bonusNumber);
 
         postValidateCheck();
     }
@@ -49,7 +49,7 @@ public class PrevWeekLotto {
                 .collect(Collectors.toList());
     }
 
-    private void initBonumNumber(final Integer bonusNumber){
+    private void initBonusNumber(final Integer bonusNumber){
         this.bonusNumber = bonusNumber;
     }
 
