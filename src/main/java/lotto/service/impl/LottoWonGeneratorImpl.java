@@ -4,9 +4,9 @@ import lotto.Money;
 import lotto.model.Lottos;
 import lotto.service.LottoGenerator;
 
-public class LottoWonGeneratorImpl implements LottoGenerator {
+import static lotto.Constants.LOTTO_PRICE;
 
-    private static final int LOTTO_PRICE = 1000;
+public class LottoWonGeneratorImpl implements LottoGenerator {
 
     @Override
     public Lottos generate(final Money money) {

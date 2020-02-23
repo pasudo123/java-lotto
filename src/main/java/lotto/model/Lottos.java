@@ -27,7 +27,7 @@ public final class Lottos {
             throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
         }
     }
-    
+
     public int getCount(){
         return lottos.size();
     }
@@ -36,17 +36,17 @@ public final class Lottos {
         return new LottoAdapter(lottos);
     }
 
-    public List<LottoResultAdapter> getResultLottery(final PrevWeekLotto prevWeekLotto){
+    public List<LottoResultAdapter> getResultLottery(final WinningLotto winningLotto){
 
-        this.nullCheck(prevWeekLotto);
+        this.nullCheck(winningLotto);
 
         return lottos.stream()
-                .map(lotto -> prevWeekLotto.getWinnerLotto(lotto.getNumbers()))
+                .map(lotto -> winningLotto.getWinnerLotto(lotto.getNumbers()))
                 .collect(Collectors.toList());
     }
 
-    private void nullCheck(final PrevWeekLotto prevWeekLotto) {
-        if(prevWeekLotto == null){
+    private void nullCheck(final WinningLotto winningLotto) {
+        if(winningLotto == null){
             throw new NullPointerException("지난주 로또 번호가 널로 입력되었습니다.");
         }
     }

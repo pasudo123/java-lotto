@@ -6,12 +6,12 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static lotto.Constants.LOTTO_MATCH_MAX_PRIZE;
+import static lotto.Constants.LOTTO_MATCH_MIN_PRIZE;
+
 public class LottoResult {
 
     private static final int[] MATCH_COMPENSATION = new int[]{0, 0, 0, 5000, 50000, 1500000, 2000000000};
-
-    private static final int MINIMUM_MATCH_PRIZE = 3;
-    private static final int MAXIMUM_MATCH_PRIZE = 6;
     private static final int LOTTO_PRICE = 1000;
 
     private final Integer purchaseWon;
@@ -47,7 +47,7 @@ public class LottoResult {
 
         int revenue = 0;
 
-        for(int prize = MINIMUM_MATCH_PRIZE; prize <= MAXIMUM_MATCH_PRIZE; prize++){
+        for(int prize = LOTTO_MATCH_MIN_PRIZE; prize <= LOTTO_MATCH_MAX_PRIZE; prize++){
             revenue += (this.getWinnerCountByPrize(prize) * this.getMoneyByPrize(prize));
         }
 

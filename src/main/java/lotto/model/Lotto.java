@@ -1,25 +1,32 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static lotto.Constants.LOTTO_MAX_NUMBER;
+import static lotto.Constants.LOTTO_MIN_NUMBER;
+
 public final class Lotto {
 
-    private static final int LOTTO_MINIMUM_COUNT = 0;
-    private static final int LOTTO_MAXIMUM_COUNT = 6;
-
-    private final List<Number> lotto = new ArrayList<>();
+  private final List<Integer> lotto;
 
     private Lotto(){
 
-        generateRandomLottoNumber();
+        final List<Integer> numbers =  IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
+                .boxed()
+                .collect(Collectors.toList());
 
-        while(isOverlap()){
-            lotto.clear();
-            generateRandomLottoNumber();
-        }
+        Collections.shuffle(numbers);
+
+        this.lotto = IntStream.rangeClosed(1, 6)
+                .map(numbers::get)
+                .boxed()
+                .collect(Collectors.toList());
+
+        Collections.sort(lotto);
     }
 
     public static Lotto create(){
@@ -27,21 +34,6 @@ public final class Lotto {
     }
 
     public List<Integer> getNumbers(){
-        return lotto.stream()
-                .map(Number::get)
-                .collect(Collectors.toList());
-    }
-
-    private void generateRandomLottoNumber(){
-        IntStream.range(LOTTO_MINIMUM_COUNT, LOTTO_MAXIMUM_COUNT)
-                .forEach(i -> lotto.add(new Number()));
-    }
-
-    private boolean isOverlap(){
-
-        return LOTTO_MAXIMUM_COUNT != lotto.stream()
-                .map(Number::get)
-                .collect(Collectors.toSet())
-                .size();
+        return new ArrayList<>(lotto);
     }
 }

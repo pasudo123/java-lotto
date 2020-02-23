@@ -6,7 +6,7 @@ import launcher.console.InputView;
 import lotto.middleware.LottoResult;
 import lotto.model.Lottos;
 import lotto.middleware.LottoAdapter;
-import lotto.model.PrevWeekLotto;
+import lotto.model.WinningLotto;
 import lotto.service.LottoGenerator;
 import lotto.service.impl.LottoWonGeneratorImpl;
 
@@ -25,9 +25,9 @@ public class LottoConsoleLauncher {
 
         final String line = InputView.inputPrevWeekLottoNumber();
         final Integer bonusNumber = InputView.inputPrevWeekBonusNumber();
-        final PrevWeekLotto prevWeekLotto = new PrevWeekLotto(line, bonusNumber);
+        final WinningLotto winningLotto = new WinningLotto(line, bonusNumber);
 
-        final LottoResult lottoResult = new LottoResult(lottos.getResultLottery(prevWeekLotto));
+        final LottoResult lottoResult = new LottoResult(lottos.getResultLottery(winningLotto));
 
         ResultView.printResult(lottoResult);
     }

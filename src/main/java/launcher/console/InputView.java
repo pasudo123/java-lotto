@@ -2,7 +2,6 @@ package launcher.console;
 
 import lotto.Money;
 import lotto.Won;
-import lotto.model.PrevWeekLotto;
 
 import java.util.Scanner;
 

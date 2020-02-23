@@ -8,7 +8,7 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("지난주 당첨 번호는")
-class PrevWeekLottoTest {
+class WinningLottoTest {
 
 
     @ParameterizedTest(name = "[{0}] 번호 입력, 보너스 번호[{1}]")
@@ -20,10 +20,10 @@ class PrevWeekLottoTest {
     void constructorTest(final String line, final Integer bonusNumber) {
 
         // when
-        final PrevWeekLotto prevWeekLotto = new PrevWeekLotto(line, bonusNumber);
+        final WinningLotto winningLotto = new WinningLotto(line, bonusNumber);
 
         // then
-        assertNotNull(prevWeekLotto);
+        assertNotNull(winningLotto);
     }
 
     @ParameterizedTest(name = "[{0}] 입력")
@@ -32,7 +32,7 @@ class PrevWeekLottoTest {
     void constructorNullAndEmptyExceptionTest(final String line) {
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, 5));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, 5));
 
         // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호에 널 또는 공백이 입력되었습니다."));
@@ -49,7 +49,7 @@ class PrevWeekLottoTest {
     void constructorLottoSizeExceptionTest(final String line, final Integer bonusNumber, final Integer size) {
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, bonusNumber));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
 
         // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호는 여섯개의 숫자가 입력되어야 합니다."));
@@ -66,7 +66,7 @@ class PrevWeekLottoTest {
     void constructorLottoRangeExceptionTest(final String line, final Integer bonusNumber, final Integer notLottoNumber) {
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, bonusNumber));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
 
         // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호는 로또 범위를 벗어났습니다."));
@@ -82,7 +82,7 @@ class PrevWeekLottoTest {
     void constructorOverlapExceptionTest(final String line, final Integer bonusNumber, final Integer overlapNumber){
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, bonusNumber));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
 
         // then
         assertTrue(e.getMessage().contains("지난 주 당첨 번호에 동일한 숫자가 입력되었습니다."));
@@ -98,7 +98,7 @@ class PrevWeekLottoTest {
     void constructorBonusNumberNegativeExceptionTest(final String line, final Integer bonusNumber){
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, bonusNumber));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
 
         // then
         assertTrue(e.getMessage().contains("보너스 번호는 로또 범위를 벗어났습니다."));
@@ -114,7 +114,7 @@ class PrevWeekLottoTest {
     void constructorBonumNumberOverlapExceptionTest(final String line, final Integer bonusNumber, final Integer overlapNumber) {
 
         // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new PrevWeekLotto(line, bonusNumber));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
 
         // then
         assertTrue(e.getMessage().contains("로또 번호안에 보너스 번호가 한개 더 있습니다. 확인해주시길 바랍니다."));

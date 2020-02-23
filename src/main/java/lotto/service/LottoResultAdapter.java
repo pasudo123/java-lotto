@@ -1,8 +1,9 @@
 package lotto.service;
 
+import static lotto.Constants.LOTTO_MATCH_MIN_PRIZE;
+
 public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
 
-    private static final int MINIMUM_PRIZE_COUNT = 3;
     private final int matchCount;
 
     public LottoResultAdapter(final int matchCount){
@@ -10,7 +11,7 @@ public class LottoResultAdapter implements Comparable<LottoResultAdapter>{
     }
 
     public boolean isPrize(){
-        return this.matchCount >= MINIMUM_PRIZE_COUNT;
+        return this.matchCount >= LOTTO_MATCH_MIN_PRIZE;
     }
 
     public boolean isEqualMatchCount(final int prize){

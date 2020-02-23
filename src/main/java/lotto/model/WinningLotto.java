@@ -8,20 +8,18 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PrevWeekLotto {
+import static lotto.Constants.*;
+
+public class WinningLotto {
 
     private static final String WHITE_SPACE = "\\s";
     private static final String SPACE = "";
     private static final String COMMA = ",";
-    private static final int LOTTO_MIN_NUMBER = 1;
-    private static final int LOTTO_MAX_NUMBER = 45;
-
-    private static final int LOTTO_COUNT = 6;
 
     private List<Integer> numbers;
     private Integer bonusNumber;
 
-    public PrevWeekLotto(final String line, final Integer bonusNumber) {
+    public WinningLotto(final String line, final Integer bonusNumber) {
 
         preValidateCheck(line, bonusNumber);
 
