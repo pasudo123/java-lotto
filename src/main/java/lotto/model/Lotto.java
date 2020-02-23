@@ -11,7 +11,7 @@ import static lotto.Constants.LOTTO_MIN_NUMBER;
 
 public final class Lotto {
 
-  private final List<Integer> lotto;
+  private final List<Integer> numbers;
 
     private Lotto(){
 
@@ -21,12 +21,12 @@ public final class Lotto {
 
         Collections.shuffle(numbers);
 
-        this.lotto = IntStream.rangeClosed(1, 6)
+        this.numbers = IntStream.rangeClosed(1, 6)
                 .map(numbers::get)
                 .boxed()
                 .collect(Collectors.toList());
 
-        Collections.sort(lotto);
+        Collections.sort(numbers);
     }
 
     public static Lotto create(){
@@ -34,6 +34,16 @@ public final class Lotto {
     }
 
     public List<Integer> getNumbers(){
-        return new ArrayList<>(lotto);
+        return new ArrayList<>(numbers);
+    }
+
+    public int getMatchCountByWinningNumbers(final List<Integer> winningNumbers){
+        return Math.toIntExact(numbers.stream()
+                .filter(winningNumbers::contains)
+                .count());
+    }
+
+    public boolean isBonusMatch(final Integer bonusNumber){
+        return numbers.contains(bonusNumber);
     }
 }

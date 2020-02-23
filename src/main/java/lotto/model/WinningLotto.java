@@ -1,8 +1,8 @@
 package lotto.model;
 
-import lotto.service.LottoResultAdapter;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -41,25 +41,6 @@ public class WinningLotto {
         checkOverlap();
     }
 
-    private void initNumbers(final String line){
-        numbers = Arrays.stream(line.split(COMMA))
-                .map(Integer::parseInt)
-                .collect(Collectors.toList());
-    }
-
-    private void initBonusNumber(final Integer bonusNumber){
-        this.bonusNumber = bonusNumber;
-    }
-
-    LottoResultAdapter getWinnerLotto(final List<Integer> myNumbers){
-
-        final int matchCount = (int)myNumbers.stream()
-                .filter(numbers::contains)
-                .count();
-
-        return new LottoResultAdapter(matchCount);
-    }
-
     private void checkNull(final String line) {
 
         if(StringUtils.isEmpty(line)) {
@@ -96,5 +77,35 @@ public class WinningLotto {
         if(numSets.contains(bonusNumber)){
             throw new IllegalArgumentException("로또 번호안에 보너스 번호가 한개 더 있습니다. 확인해주시길 바랍니다.");
         }
+    }
+
+    private void initNumbers(final String line){
+        numbers = Arrays.stream(line.split(COMMA))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+    }
+
+    private void initBonusNumber(final Integer bonusNumber){
+        this.bonusNumber = bonusNumber;
+    }
+
+    /**
+     * 지난주 당첨 번호와 보너스 번호를 통해서, 내 로또 번호중에서 당첨 로또를 반환
+     */
+    public List<LottoRankResult> getResultByMine(final Lottos lottos) {
+
+        final List<LottoRankResult> lottoRankResults = new ArrayList<>();
+
+        final List<Lotto> myLottoList = lottos.get();
+
+        for(Lotto lotto : myLottoList){
+            final int matchCount = lotto.getMatchCountByWinningNumbers(numbers);
+            final boolean isMatchBonus = lotto.isBonusMatch(bonusNumber);
+            final List<Integer> myNumbers = lotto.getNumbers();
+
+            lottoRankResults.add(new LottoRankResult(matchCount, isMatchBonus, myNumbers));
+        }
+
+        return lottoRankResults;
     }
 }

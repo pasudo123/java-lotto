@@ -1,31 +1,29 @@
 package lotto.middleware;
 
-import lotto.service.LottoResultAdapter;
+import lotto.model.LottoRankResult;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.Constants.LOTTO_MATCH_MAX_PRIZE;
-import static lotto.Constants.LOTTO_MATCH_MIN_PRIZE;
+import static lotto.Constants.*;
 
 public class LottoResult {
 
     private static final int[] MATCH_COMPENSATION = new int[]{0, 0, 0, 5000, 50000, 1500000, 2000000000};
-    private static final int LOTTO_PRICE = 1000;
 
     private final Integer purchaseWon;
-    private final List<LottoResultAdapter> winnerLotto;
+    private final List<LottoRankResult> winnerLotto;
     private Integer revenue;
 
-    public LottoResult(final List<LottoResultAdapter> adapterList){
+    public LottoResult(final List<LottoRankResult> adapterList){
 
         validate(adapterList);
 
         this.purchaseWon = adapterList.size() * LOTTO_PRICE;
 
         this.winnerLotto = adapterList.stream()
-                .filter(LottoResultAdapter::isPrize)
+                .filter(LottoRankResult::isPrize)
                 .collect(Collectors.toList());
 
         Collections.sort(winnerLotto);
@@ -35,12 +33,6 @@ public class LottoResult {
 
     public int getMoneyByPrize(final Integer prize) {
         return MATCH_COMPENSATION[prize];
-    }
-
-    public int getWinnerCountByPrize(final Integer prize){
-        return (int) winnerLotto.stream()
-                .filter(winnerLotto -> winnerLotto.isEqualMatchCount(prize))
-                .count();
     }
 
     private void initRevenue(){
@@ -58,7 +50,7 @@ public class LottoResult {
         return revenue;
     }
 
-    private void validate(final List<LottoResultAdapter> adapterList){
+    private void validate(final List<LottoRankResult> adapterList){
         if(adapterList == null || adapterList.size() == 0){
             throw new IllegalArgumentException("구입한 로또가 존재하지 않습니다.");
         }

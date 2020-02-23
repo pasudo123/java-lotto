@@ -6,19 +6,25 @@ import java.util.stream.Collectors;
 
 public enum Rank {
 
-    FIRST(6, 200000000),
-    SECOND(5, 30000000),
-    THIRD(5, 20000000),
-    FOURTH(4, 50000),
-    FIFTH(3, 10000),
-    MISS(0, 0);
+    FIRST(1, 6, 200000000),
+    SECOND(2,5, 30000000),
+    THIRD(3,5, 20000000),
+    FOURTH(4, 4, 50000),
+    FIFTH(5, 3, 10000),
+    MISS(6, 0, 0);
 
+    private int ranking;
     private int countOfMatch;
     private int winningMoney;
 
-    Rank(final int countOfMatch, final int winningMoney){
+    Rank(final int ranking, final int countOfMatch, final int winningMoney){
+        this.ranking = ranking;
         this.countOfMatch = countOfMatch;
         this.winningMoney = winningMoney;
+    }
+
+    public int getRanking(){
+        return ranking;
     }
 
     public int getCountOfMatch() {

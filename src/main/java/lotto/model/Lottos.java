@@ -1,11 +1,7 @@
 package lotto.model;
 
-import lotto.service.LottoResultAdapter;
-import lotto.middleware.LottoAdapter;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class Lottos {
@@ -32,17 +28,19 @@ public final class Lottos {
         return lottos.size();
     }
 
-    public LottoAdapter getLottoAdapter(){
-        return new LottoAdapter(lottos);
+    public List<Lotto> get(){
+        return new ArrayList<>(lottos);
     }
 
-    public List<LottoResultAdapter> getResultLottery(final WinningLotto winningLotto){
+    public List<LottoRankResult> getResultLottery(final WinningLotto winningLotto){
 
         this.nullCheck(winningLotto);
 
-        return lottos.stream()
-                .map(lotto -> winningLotto.getWinnerLotto(lotto.getNumbers()))
-                .collect(Collectors.toList());
+//        return lottos.stream()
+//                .map(lotto -> winningLotto.getWinnerLottoByMine(lotto.getNumbers()))
+//                .collect(Collectors.toList());
+
+        return null;
     }
 
     private void nullCheck(final WinningLotto winningLotto) {

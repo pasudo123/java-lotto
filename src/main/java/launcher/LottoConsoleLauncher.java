@@ -1,14 +1,18 @@
 package launcher;
 
+import launcher.console.InputView;
 import launcher.console.ResultView;
 import lotto.Money;
-import launcher.console.InputView;
-import lotto.middleware.LottoResult;
+import lotto.dto.LottoDto;
+import lotto.dto.WinningLottoDto;
+import lotto.model.LottoRankResult;
 import lotto.model.Lottos;
-import lotto.middleware.LottoAdapter;
 import lotto.model.WinningLotto;
 import lotto.service.LottoGenerator;
+import lotto.service.LottoResultService;
 import lotto.service.impl.LottoWonGeneratorImpl;
+
+import java.util.List;
 
 public class LottoConsoleLauncher {
 
@@ -18,17 +22,18 @@ public class LottoConsoleLauncher {
 
         final LottoGenerator lottoGenerator = new LottoWonGeneratorImpl();
         final Lottos lottos = lottoGenerator.generate(money);
-        final LottoAdapter lottoAdapter = lottos.getLottoAdapter();
+        final LottoDto lottoDto = new LottoDto(lottos);
 
-        ResultView.printMyLottoCount(lottoAdapter);
-        ResultView.printMyLottoList(lottoAdapter);
+        ResultView.printMyLottoCount(lottoDto);
+        ResultView.printMyLottoList(lottoDto);
 
         final String line = InputView.inputPrevWeekLottoNumber();
         final Integer bonusNumber = InputView.inputPrevWeekBonusNumber();
+
         final WinningLotto winningLotto = new WinningLotto(line, bonusNumber);
+        final List<LottoRankResult> lottoRankResults = winningLotto.getResultByMine(lottos);
+        final WinningLottoDto winningLottoDto = LottoResultService.getWinningLottoByResult(lottoRankResults);
 
-        final LottoResult lottoResult = new LottoResult(lottos.getResultLottery(winningLotto));
-
-        ResultView.printResult(lottoResult);
+        ResultView.printWinning(winningLottoDto);
     }
 }
