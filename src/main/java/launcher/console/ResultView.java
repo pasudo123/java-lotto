@@ -33,7 +33,11 @@ public class ResultView {
         System.out.println("당첨통계");
         System.out.println("=============================================");
 
-        final List<LottoRankResult> winningResults = winningLottoDto.getWinningResults();
+        final int[] countOfRanking = winningLottoDto.getCountOfRanking();
+
+        for(int i = 5; i >= 1; i--){
+            
+        }
 
 //        for(LottoRankResult result : winningResults){
 //            System.out.println(String.format(MATCH_FORMAT,

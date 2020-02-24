@@ -31,6 +31,14 @@ public class LottoRankResult implements Comparable<LottoRankResult>{
         return this.matchCount >= LOTTO_MATCH_MIN_PRIZE;
     }
 
+    public boolean isBonus(){
+        return this.isMatchBonus;
+    }
+
+    public boolean isEqualMatchCount(final int matchCount) {
+        return (this.matchCount == matchCount);
+    }
+
     public int getWinningMoney(){
         return rank.getWinningMoney();
     }

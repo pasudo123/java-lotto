@@ -8,12 +8,12 @@ public class WinningLottoDto {
 
     private double revenue;
     private List<LottoRankResult> winningResults;
-    private int[] countsOfRanking;
+    private int[] countOfRanking;
 
-    public WinningLottoDto(final double revenue, final List<LottoRankResult> winningResults, final int[] countsOfRanking){
+    public WinningLottoDto(final double revenue, final List<LottoRankResult> winningResults, final int[] countOfRanking){
         this.revenue = revenue;
         this.winningResults = winningResults;
-        this.countsOfRanking = countsOfRanking;
+        this.countOfRanking = countOfRanking;
     }
 
     public double getRevenue(){
@@ -24,7 +24,7 @@ public class WinningLottoDto {
         return winningResults;
     }
 
-    public int getCountOfRanking(final int ranking){
-        return countsOfRanking[ranking];
+    public int[] getCountOfRanking(){
+        return countOfRanking;
     }
 }
