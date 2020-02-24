@@ -27,16 +27,23 @@ public enum Rank {
         return ranking;
     }
 
-    public int getCountOfMatch() {
-        return countOfMatch;
-    }
-
     public int getWinningMoney() {
         return winningMoney;
     }
 
-    public static Rank of(final int countOfMatch, final Boolean matchBonus){
+    public int getCountOfMatch(){
+        return countOfMatch;
+    }
 
+    public static Rank of(final int ranking){
+        final Rank[]ranks = values();
+        return Arrays.stream(ranks)
+                .filter(rank -> rank.getRanking() == ranking)
+                .findFirst()
+                .orElseGet(() -> Rank.MISS);
+    }
+
+    public static Rank of(final int countOfMatch, final Boolean matchBonus){
         validate(countOfMatch);
 
         final Rank[]ranks = values();
@@ -49,14 +56,8 @@ public enum Rank {
         }
 
         if(myRank.size() == 1) {
-
-            if(matchBonus == Boolean.TRUE){
-                throw new IllegalArgumentException("보너스번호와 매칭되는 당첨에 문제가 발생하였습니다.");
-            }
-
             return myRank.get(0);
         }
-
 
         if(matchBonus){
             return Rank.SECOND;

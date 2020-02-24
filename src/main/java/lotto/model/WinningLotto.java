@@ -90,7 +90,7 @@ public class WinningLotto {
     }
 
     /**
-     * 지난주 당첨 번호와 보너스 번호를 통해서, 내 로또 번호중에서 당첨 로또를 반환
+     * 지난주 당첨 번호와 보너스 번호를 통해서, 내 로또 번호들의 결과를 반환.
      */
     public List<LottoRankResult> getResultByMine(final Lottos lottos) {
 

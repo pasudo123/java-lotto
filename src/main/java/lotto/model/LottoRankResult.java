@@ -10,7 +10,6 @@ import static lotto.Constants.LOTTO_MATCH_MIN_PRIZE;
 public class LottoRankResult implements Comparable<LottoRankResult>{
 
     private final int matchCount;
-    private boolean isMatchBonus;
     private List<Integer> numbers;
     private Rank rank;
 
@@ -18,12 +17,7 @@ public class LottoRankResult implements Comparable<LottoRankResult>{
                            final boolean isMatchBonus,
                            final List<Integer> numbers){
         this.matchCount = matchCount;
-        this.isMatchBonus = isMatchBonus;
         this.numbers = new ArrayList<>(numbers);
-        initRank();
-    }
-
-    private void initRank(){
         rank = Rank.of(matchCount, isMatchBonus);
     }
 
@@ -35,12 +29,8 @@ public class LottoRankResult implements Comparable<LottoRankResult>{
         return rank.getWinningMoney();
     }
 
-    public int getCountOfMatch(){
-        return rank.getCountOfMatch();
-    }
-
-    public int getRanking(){
-        return rank.getRanking();
+    public Rank getRank(){
+        return rank;
     }
 
     @Override

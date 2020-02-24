@@ -31,21 +31,4 @@ public final class Lottos {
     public List<Lotto> get(){
         return new ArrayList<>(lottos);
     }
-
-    public List<LottoRankResult> getResultLottery(final WinningLotto winningLotto){
-
-        this.nullCheck(winningLotto);
-
-//        return lottos.stream()
-//                .map(lotto -> winningLotto.getWinnerLottoByMine(lotto.getNumbers()))
-//                .collect(Collectors.toList());
-
-        return null;
-    }
-
-    private void nullCheck(final WinningLotto winningLotto) {
-        if(winningLotto == null){
-            throw new NullPointerException("지난주 로또 번호가 널로 입력되었습니다.");
-        }
-    }
 }
