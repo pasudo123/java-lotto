@@ -23,7 +23,7 @@ public class ResultView {
         for(int rank = 5; rank >= 1; rank--){
             System.out.println(String.format(MATCH_FORMAT,
                     Rank.of(rank).getCountOfMatch(),
-                    (rank == 2) ? "보너스볼 일치" : "",
+                    (rank == 2) ? ", 보너스볼 일치" : "",
                     Rank.of(rank).getWinningMoney(),
                     countOfRanking[rank]));
         }

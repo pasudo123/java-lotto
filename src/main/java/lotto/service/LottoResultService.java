@@ -37,17 +37,22 @@ public class LottoResultService {
         final int[] countOfRanking = new int[7]; // 0 ~ 6
 
         final Rank[]ranks = Rank.values();
+
         for(Rank rank : ranks) {
-
-            final long rankCount = winningResults.stream()
-                    .filter(lottoRankResult -> lottoRankResult.getRank() == rank)
-                    .count();
-
+            final int rankCount = getCountByRank(winningResults, rank);
             countOfRanking[rank.getRanking()] = Math.toIntExact(rankCount);
         }
 
-        final double revenue = (double)(winningSumMoney / totalPurchaseMoney) * PERCENTS_OF_100;
+        final double revenue = ((double)winningSumMoney / (double)totalPurchaseMoney) * PERCENTS_OF_100;
 
         return new WinningLottoDto(revenue, countOfRanking);
+    }
+
+    private static int getCountByRank(final List<LottoRankResult> winningResults, final Rank rank) {
+        long count = winningResults.stream()
+                .filter(lottoRankResult -> lottoRankResult.getRank() == rank)
+                .count();
+
+        return Math.toIntExact(count);
     }
 }
