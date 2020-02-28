@@ -2,15 +2,16 @@ package lotto.service.impl;
 
 import lotto.Money;
 import lotto.model.Lottos;
-import lotto.service.LottoGenerator;
+import lotto.service.LottosGenerator;
 
 import static lotto.Constants.LOTTO_PRICE;
 
-public class LottoWonGeneratorImpl implements LottoGenerator {
+public class LottosWonGeneratorImpl implements LottosGenerator {
 
     @Override
     public Lottos generate(final Money money) {
-        return Lottos.create(getCountByMoney(money));
+        final int lottoCount = getCountByMoney(money);
+        return Lottos.create(lottoCount);
     }
 
     private static int getCountByMoney(final Money money){

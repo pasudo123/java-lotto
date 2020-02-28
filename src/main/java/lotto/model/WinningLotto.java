@@ -2,7 +2,6 @@ package lotto.model;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -20,7 +19,6 @@ public class WinningLotto {
     private Integer bonusNumber;
 
     public WinningLotto(final String line, final Integer bonusNumber) {
-
         preValidateCheck(line, bonusNumber);
 
         final String newLine = line.replaceAll(WHITE_SPACE, SPACE);
@@ -42,7 +40,6 @@ public class WinningLotto {
     }
 
     private void checkNull(final String line) {
-
         if(StringUtils.isEmpty(line)) {
             throw new IllegalArgumentException("지난 주 당첨 번호에 널 또는 공백이 입력되었습니다.");
         }
@@ -67,7 +64,6 @@ public class WinningLotto {
     }
 
     private void checkOverlap(){
-
         final HashSet<Integer> numSets = new HashSet<>(numbers);
 
         if(numSets.size() != LOTTO_COUNT){
@@ -89,23 +85,9 @@ public class WinningLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    /**
-     * 지난주 당첨 번호와 보너스 번호를 통해서, 내 로또 번호들의 결과를 반환.
-     */
-    public List<LottoRankResult> getResultByMine(final Lottos lottos) {
-
-        final List<LottoRankResult> lottoRankResults = new ArrayList<>();
-
-        final List<Lotto> myLottoList = lottos.get();
-
-        for(Lotto lotto : myLottoList){
-            final int matchCount = lotto.getMatchCountByWinningNumbers(numbers);
-            final boolean isMatchBonus = lotto.isBonusMatch(bonusNumber);
-            final List<Integer> myNumbers = lotto.getNumbers();
-
-            lottoRankResults.add(new LottoRankResult(matchCount, isMatchBonus, myNumbers));
-        }
-
-        return lottoRankResults;
+    public RankResults getRankResults(final Lottos lottos) {
+        return new RankResults(lottos.get().stream()
+                .map(lotto -> lotto.toRankResult(numbers, bonusNumber))
+                .collect(Collectors.toList()));
     }
 }

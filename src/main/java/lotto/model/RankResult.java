@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.type.MatchType;
 import lotto.type.Rank;
 
 import java.util.ArrayList;
@@ -7,18 +8,18 @@ import java.util.List;
 
 import static lotto.Constants.LOTTO_MATCH_MIN_PRIZE;
 
-public class LottoRankResult implements Comparable<LottoRankResult>{
+public class RankResult implements Comparable<RankResult>{
 
-    private final int matchCount;
+    private final Integer matchCount;
     private List<Integer> numbers;
     private Rank rank;
 
-    public LottoRankResult(final int matchCount,
-                           final boolean isMatchBonus,
-                           final List<Integer> numbers){
+    public RankResult(final int matchCount,
+                      final boolean isMatchBonus,
+                      final List<Integer> numbers){
         this.matchCount = matchCount;
         this.numbers = new ArrayList<>(numbers);
-        rank = Rank.of(matchCount, isMatchBonus);
+        this.rank = Rank.findByMatchType(MatchType.of(matchCount, isMatchBonus));
     }
 
     public boolean isPrize(){
@@ -26,7 +27,7 @@ public class LottoRankResult implements Comparable<LottoRankResult>{
     }
 
     public int getWinningMoney(){
-        return rank.getWinningMoney();
+        return rank.winningMoney();
     }
 
     public Rank getRank(){
@@ -34,7 +35,7 @@ public class LottoRankResult implements Comparable<LottoRankResult>{
     }
 
     @Override
-    public int compareTo(LottoRankResult lottoRankResult) {
-        return this.matchCount - lottoRankResult.matchCount;
+    public int compareTo(RankResult rankResult) {
+        return this.matchCount.compareTo(rankResult.matchCount);
     }
 }

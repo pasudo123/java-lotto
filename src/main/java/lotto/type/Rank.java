@@ -1,74 +1,75 @@
 package lotto.type;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.Money;
+import lotto.Won;
+import lotto.model.RankResults;
+
+import java.util.*;
 
 public enum Rank {
 
-    FIRST(1, 6, 200000000),
-    SECOND(2,5, 30000000),
-    THIRD(3,5, 20000000),
-    FOURTH(4, 4, 50000),
-    FIFTH(5, 3, 10000),
-    MISS(6, 0, 0);
+    FIRST(1, MatchType.of(6, false), new Won("200000000")),
+    SECOND(2, MatchType.of( 5, true), new Won("30000000")),
+    THIRD(3, MatchType.of(5, false), new Won("20000000")),
+    FOURTH(4, MatchType.of(4, false), new Won("50000")),
+    FIFTH(5, MatchType.of(3, false), new Won("10000")),
+    MISS(6, MatchType.of(0, false), new Won("0"));
 
-    private int ranking;
-    private int countOfMatch;
-    private int winningMoney;
+    private Integer ranking;
+    private MatchType matchType;
+    private Money money;
 
-    Rank(final int ranking, final int countOfMatch, final int winningMoney){
-        this.ranking = ranking;
-        this.countOfMatch = countOfMatch;
-        this.winningMoney = winningMoney;
+    static class RankComparator implements Comparator<Rank> {
+        @Override
+        public int compare(Rank o1, Rank o2) {
+            return o2.getRanking().compareTo(o1.getRanking());
+        }
     }
 
-    public int getRanking(){
+    Rank(final int ranking, final MatchType matchType, final Money money){
+        this.ranking = ranking;
+        this.matchType = matchType;
+        this.money = money;
+    }
+
+    public Integer getRanking(){
         return ranking;
     }
 
-    public int getWinningMoney() {
-        return winningMoney;
+    public int countOfMatch(){
+        return matchType.countOfMatch();
     }
 
-    public int getCountOfMatch(){
-        return countOfMatch;
+    public MatchType.BonusMatch bonusMatch(){
+        return matchType.bonusMatch();
     }
 
-    public static Rank of(final int ranking){
-        final Rank[]ranks = values();
-        return Arrays.stream(ranks)
-                .filter(rank -> rank.getRanking() == ranking)
-                .findFirst()
+    public int winningMoney() {
+        return money.get();
+    }
+
+    public static Rank findByMatchType(final MatchType matchType){
+        assert matchType != null;
+
+        return Arrays.stream(values())
+                .filter(rank ->
+                        rank.countOfMatch() == matchType.countOfMatch()
+                        && rank.bonusMatch() == matchType.bonusMatch())
+                .findAny()
                 .orElseGet(() -> Rank.MISS);
     }
 
-    public static Rank of(final int countOfMatch, final Boolean matchBonus){
-        validate(countOfMatch);
+    public static Map<Rank, Long> toCountOfRank(RankResults rankResults) {
 
-        final Rank[]ranks = values();
-        final List<Rank> myRank = Arrays.stream(ranks)
-                .filter(rank -> rank.countOfMatch == countOfMatch)
-                .collect(Collectors.toList());
+        final Map<Rank, Long> myRanksCount = new LinkedHashMap<>();
 
-        if(myRank.size() == 0){
-            return Rank.MISS;
+        final Rank[] ranks = values();
+        Arrays.sort(ranks, new RankComparator());
+
+        for(Rank rank : values()){
+            myRanksCount.put(rank, rankResults.countOfRank(rank));
         }
 
-        if(myRank.size() == 1) {
-            return myRank.get(0);
-        }
-
-        if(matchBonus){
-            return Rank.SECOND;
-        }
-
-        return Rank.THIRD;
-    }
-
-    private static void validate(final int countOfMatch){
-        if(countOfMatch < 0 || countOfMatch > 6) {
-            throw new IllegalArgumentException("로또번호와 매칭되는 개수가 음수 또는 여섯개를 초과하였습니다.");
-        }
+        return Collections.unmodifiableMap(myRanksCount);
     }
 }

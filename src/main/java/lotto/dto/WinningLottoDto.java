@@ -1,20 +1,24 @@
 package lotto.dto;
 
+import lotto.type.Rank;
+
+import java.util.Map;
+
 public class WinningLottoDto {
 
     private double revenue;
-    private int[] countOfRanking;
+    private Map<Rank, Long> ranks;
 
-    public WinningLottoDto(final double revenue, final int[] countOfRanking){
+    public WinningLottoDto(final double revenue, final Map<Rank, Long> ranks){
         this.revenue = revenue;
-        this.countOfRanking = countOfRanking;
+        this.ranks = ranks;
     }
 
     public double getRevenue(){
         return revenue;
     }
 
-    public int[] getCountOfRanking(){
-        return countOfRanking;
+    public Map<Rank, Long> getRanks(){
+        return ranks;
     }
 }

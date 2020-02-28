@@ -6,6 +6,7 @@ import lotto.type.Rank;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 public class ResultView {
 
@@ -17,18 +18,24 @@ public class ResultView {
         System.out.println("당첨통계");
         System.out.println("=============================================");
 
-        final int[] countOfRanking = winningLottoDto.getCountOfRanking();
-
-        // 5등 -> 1등 순
-        for(int rank = 5; rank >= 1; rank--){
-            System.out.println(String.format(MATCH_FORMAT,
-                    Rank.of(rank).getCountOfMatch(),
-                    (rank == 2) ? ", 보너스볼 일치" : "",
-                    Rank.of(rank).getWinningMoney(),
-                    countOfRanking[rank]));
+        final Map<Rank, Long> ranks = winningLottoDto.getRanks();
+        for(Rank rank : ranks.keySet()){
+            printRankResultInConsole(ranks, rank);
         }
 
         System.out.println("총 수익률은 " + winningLottoDto.getRevenue() + "% 입니다.");
+    }
+
+    private static void printRankResultInConsole(final Map<Rank, Long> ranks, final Rank rank) {
+        if(rank == Rank.MISS){
+            return;
+        }
+
+        System.out.println(String.format(MATCH_FORMAT,
+                rank.countOfMatch(),
+                (rank.getRanking() == 2) ? ", 보너스볼 일치" : "",
+                rank.winningMoney(),
+                ranks.get(rank)));
     }
 
     public static void printMyLottoCount(final LottoDto adapter) {
@@ -37,7 +44,7 @@ public class ResultView {
 
     public static void printMyLottoList(final LottoDto adapter){
 
-        final List<List<Integer>> myLottoList = adapter.getMyLottoList();
+        final List<List<Integer>> myLottoList = adapter.getMyLottos();
 
         final StringBuilder sb = new StringBuilder();
 

@@ -9,18 +9,18 @@ import java.util.stream.Collectors;
 
 public class LottoDto {
 
-    private final List<Lotto> lottoList;
+    private final List<Lotto> lottos;
 
     public LottoDto(final Lottos lottos){
-        lottoList = new ArrayList<>(lottos.get());
+        this.lottos = new ArrayList<>(lottos.get());
     }
 
     public int getLottoCount(){
-        return lottoList.size();
+        return lottos.size();
     }
 
-    public List<List<Integer>> getMyLottoList(){
-        return lottoList.stream()
+    public List<List<Integer>> getMyLottos(){
+        return lottos.stream()
                 .map(Lotto::getNumbers)
                 .collect(Collectors.toList());
     }

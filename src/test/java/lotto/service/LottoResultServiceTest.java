@@ -1,7 +1,7 @@
 package lotto.service;
 
 import lotto.dto.WinningLottoDto;
-import lotto.model.LottoRankResult;
+import lotto.model.RankResult;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -20,7 +20,7 @@ class LottoResultServiceTest {
     @ParameterizedTest
     @MethodSource("provideLottoRankResults")
     @DisplayName("당첨로또를 반환한다.")
-    void getWinningLottoByResult(List<LottoRankResult> results) {
+    void getWinningLottoByResult(List<RankResult> results) {
 
         // when
         WinningLottoDto winningLottoDto = LottoResultService.getWinningLottoByResult(results);
@@ -37,20 +37,20 @@ class LottoResultServiceTest {
         );
     }
 
-    static Stream<List<LottoRankResult>> provideLottoRankResults(){
+    static Stream<List<RankResult>> provideLottoRankResults(){
         return Stream.of(
-            new ArrayList<LottoRankResult>(){{
-                add(new LottoRankResult(1, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(2, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(3, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(4, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(5, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(6, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(1, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(2, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(3, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(4, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
-                add(new LottoRankResult(5, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+            new ArrayList<RankResult>(){{
+                add(new RankResult(1, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(2, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(3, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(4, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(5, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(6, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(1, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(2, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(3, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(4, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
+                add(new RankResult(5, true, Arrays.asList(1, 2, 3, 4, 5, 6)));
             }}
         );
     }
