@@ -21,7 +21,7 @@ class LottoWonGeneratorTest {
     public void generateTest(final Won won, final int lottoCount){
 
         // given
-        LottosGenerator lottosGenerator = new LottosWonGeneratorImpl();
+        LottosGenerator lottosGenerator = new LottosRandomGeneratorImpl();
 
         // when
         final Lottos lottos = lottosGenerator.generate(won);

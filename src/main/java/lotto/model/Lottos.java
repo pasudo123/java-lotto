@@ -9,19 +9,27 @@ public final class Lottos {
     private final List<Lotto> lottos = new ArrayList<>();
 
     private Lottos(final int count){
-        countCheck(count);
         IntStream.rangeClosed(1, count)
                 .forEach(i -> lottos.add(Lotto.create()));
     }
 
-    public static Lottos create(final int count){
+    private Lottos(final List<String> lines) {
+
+    }
+
+    public static Lottos createByRandom(final int count){
+        validateCount(count);
         return new Lottos(count);
     }
 
-    private void countCheck(final int count) {
+    private static void validateCount(final int count) {
         if(count <= 0) {
             throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
         }
+    }
+
+    public static Lottos createByPassive(List<String> lines){
+        validateLines()
     }
 
     public int getCount(){

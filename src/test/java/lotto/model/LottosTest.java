@@ -15,7 +15,7 @@ class LottosTest {
     @ValueSource(ints = {1, 2, 3, 4})
     @DisplayName("생성되었습니다.")
     void createTest(final int count) {
-        assertNotNull(Lottos.create(count));
+        assertNotNull(Lottos.createByRandom(count));
     }
 
     @ParameterizedTest
@@ -23,7 +23,7 @@ class LottosTest {
     @DisplayName("생성에 실패하였습니다.")
     void createExceptionTest(final int count) {
 
-        Exception e = assertThrows(IllegalArgumentException.class, () -> Lottos.create(count));
+        Exception e = assertThrows(IllegalArgumentException.class, () -> Lottos.createByRandom(count));
 
         assertTrue(e.getMessage().contains("로또를 생성할 수 없습니다."));
     }
@@ -38,7 +38,7 @@ class LottosTest {
     void getCountTest(final int count, final int expected) {
 
         // given & when
-        final Lottos lottos = Lottos.create(count);
+        final Lottos lottos = Lottos.createByRandom(count);
 
         // then
         assertThat(lottos.getCount()).isEqualTo(expected);

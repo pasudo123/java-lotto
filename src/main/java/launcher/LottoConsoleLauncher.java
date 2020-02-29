@@ -3,6 +3,7 @@ package launcher;
 import launcher.console.InputView;
 import launcher.console.ResultView;
 import lotto.Money;
+import lotto.Won;
 import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
 import lotto.model.Lottos;
@@ -10,7 +11,9 @@ import lotto.model.RankResults;
 import lotto.model.WinningLotto;
 import lotto.service.LottoResultService;
 import lotto.service.LottosGenerator;
-import lotto.service.impl.LottosWonGeneratorImpl;
+import lotto.service.impl.LottosRandomGeneratorImpl;
+
+import java.util.List;
 
 public class LottoConsoleLauncher {
 
@@ -19,13 +22,18 @@ public class LottoConsoleLauncher {
 
     static {
         lottoResultService = new LottoResultService();
-        lottosGenerator = new LottosWonGeneratorImpl();
+        lottosGenerator = new LottosRandomGeneratorImpl();
     }
 
     public static void main(String[] args) {
 
-        final Money money = InputView.inputMoney();
-        final Lottos lottos = lottosGenerator.generate(money);
+        final Integer moneys = InputView.inputMoney();
+        final Integer passiveCount = InputView.inputPassiveLottoCount();
+        final List<String> passiveLottoPapers = InputView.inputPassiveLotto(passiveCount);
+
+        final Money won = Won.of(moneys, passiveLottoPapers);
+
+        final Lottos lottos = lottosGenerator.generate(won);
         final LottoDto lottoDto = new LottoDto(lottos);
 
         ResultView.printMyLottoCount(lottoDto);

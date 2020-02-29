@@ -1,21 +1,41 @@
 package launcher.console;
 
-import lotto.Money;
-import lotto.Won;
-
+import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static Money inputMoney(){
+    public static Integer inputMoney(){
         return askPurchaseMoney();
     }
 
-    private static Won askPurchaseMoney(){
+    public static Integer inputPassiveLottoCount() {
+        return askPurchasePassiveLottoCount();
+    }
+
+    public static List<String> inputPassiveLotto(final int count) {
+        return askPurchasePassiveLotto(count);
+    }
+
+    private static Integer askPurchaseMoney(){
         System.out.println("구입금액을 입력해주세요.");
-        return new Won(SCANNER.nextLine());
+        return SCANNER.nextInt();
+    }
+
+    private static Integer askPurchasePassiveLottoCount(){
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return SCANNER.nextInt();
+    }
+
+    private static List<String> askPurchasePassiveLotto(final int count){
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        return IntStream.rangeClosed(1, count)
+                .mapToObj(i -> SCANNER.nextLine())
+                .collect(Collectors.toList());
     }
 
     public static String inputPrevWeekLottoNumber(){
