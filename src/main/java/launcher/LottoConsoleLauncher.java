@@ -6,6 +6,7 @@ import lotto.Money;
 import lotto.Won;
 import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
+import lotto.model.LottoStore;
 import lotto.model.Lottos;
 import lotto.model.RankResults;
 import lotto.model.WinningLotto;
@@ -33,7 +34,7 @@ public class LottoConsoleLauncher {
 
         final Money won = Won.of(moneys, passiveLottoPapers);
 
-        final Lottos lottos = lottosGenerator.generate(won);
+        final Lottos lottos = LottoStore.getMyLottos(won);
         final LottoDto lottoDto = new LottoDto(lottos);
 
         ResultView.printMyLottoCount(lottoDto);

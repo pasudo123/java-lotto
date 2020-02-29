@@ -1,6 +1,7 @@
 package lotto.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -14,12 +15,19 @@ public final class Lottos {
     }
 
     private Lottos(final List<String> lines) {
-
+        IntStream.rangeClosed(1, lines.size())
+                .forEach(i -> lottos.add(Lotto.from(lines.get(i))));
     }
 
     public static Lottos createByRandom(final int count){
         validateCount(count);
         return new Lottos(count);
+    }
+
+    public static Lottos createByPassive(final List<String> lines){
+        validateLines(lines);
+        return new Lottos(lines);
+
     }
 
     private static void validateCount(final int count) {
@@ -28,8 +36,10 @@ public final class Lottos {
         }
     }
 
-    public static Lottos createByPassive(List<String> lines){
-        validateLines()
+    private static void validateLines(final List<String> lines) {
+        if(lines == null || lines.size() <= 0) {
+            throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
+        }
     }
 
     public int getCount(){
@@ -37,6 +47,6 @@ public final class Lottos {
     }
 
     public List<Lotto> get(){
-        return new ArrayList<>(lottos);
+        return Collections.unmodifiableList(lottos);
     }
 }

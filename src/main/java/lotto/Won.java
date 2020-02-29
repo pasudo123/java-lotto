@@ -3,6 +3,7 @@ package lotto;
 import java.util.List;
 
 import static lotto.Constants.LOTTO_ONE_PRICE;
+import static lotto.Constants.NUMBER_OF_ZERO;
 
 public final class Won implements Money {
     private int won;
@@ -36,15 +37,15 @@ public final class Won implements Money {
     }
 
     private static void validate(final Integer money, final Integer passiveBuyingLottoCount) {
-        if(money < 0) {
+        if(money < NUMBER_OF_ZERO) {
             throw new IllegalArgumentException("들어온 금액이 음수입니다.");
         }
 
-        if(money % LOTTO_ONE_PRICE != 0){
+        if(money % LOTTO_ONE_PRICE != NUMBER_OF_ZERO){
             throw new IllegalArgumentException("들어온 금액이 1000원 단위가 아닙니다.");
         }
 
-        if(passiveBuyingLottoCount < 0) {
+        if(passiveBuyingLottoCount < NUMBER_OF_ZERO) {
             throw new IllegalArgumentException("수동 구매의 로또 개수가 음수입니다.");
         }
 

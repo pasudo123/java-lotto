@@ -6,8 +6,6 @@ import lotto.service.LottosGenerator;
 import lotto.service.impl.LottosPassiveGeneratorImpl;
 import lotto.service.impl.LottosRandomGeneratorImpl;
 
-import java.util.List;
-
 public class LottoStore {
 
     private static LottosGenerator lottosPassiveGenerator;
@@ -18,13 +16,17 @@ public class LottoStore {
         lottosRandomGenerator = new LottosRandomGeneratorImpl();
     }
 
-    public static Lottos getMyLottos(final Money myMoney, final List<String> passiveLottoPapers){
+    public static Lottos getMyLottos(final Money myMoney){
 
         final LottoBuyingType lottoBuyingType = myMoney.getBuyingType();
 
-        if(lottoBuyingType.getType() == LottoBuyingType.BuyingType.RANDOM){
-            lottosRandomGenerator.generate(myMoney);
-        }
+//        if(lottoBuyingType.getType() == LottoBuyingType.BuyingType.RANDOM){
+//            lottosRandomGenerator.generate(myMoney);
+//        }
+//
+//        if(lottoBuyingType.getType() == LottoBuyingType.BuyingType.PASSIVE){
+//            lottosPassiveGenerator.generate(myMoney);
+//        }
 
         return null;
     }
