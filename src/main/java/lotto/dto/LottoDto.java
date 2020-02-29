@@ -1,6 +1,6 @@
 package lotto.dto;
 
-import lotto.Money;
+import lotto.model.BuyingPocket;
 import lotto.model.Lotto;
 import lotto.model.Lottos;
 
@@ -14,10 +14,10 @@ public class LottoDto {
     private final Integer passiveCount;
     private final Integer randomCount;
 
-    public LottoDto(final Lottos lottos, final Money won){
+    public LottoDto(final Lottos lottos, final BuyingPocket pocket){
         this.lottos = new ArrayList<>(lottos.get());
-        this.passiveCount = won.getBuyingType().getPassiveCount();
-        this.randomCount = won.getBuyingType().getRandomCount();
+        this.passiveCount = pocket.getBuyingType().getPassiveCount();
+        this.randomCount = pocket.getBuyingType().getRandomCount();
     }
 
     public List<List<Integer>> getMyLottos(){

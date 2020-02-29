@@ -1,6 +1,6 @@
 package lotto.service.impl;
 
-import lotto.Money;
+import lotto.model.BuyingPocket;
 import lotto.model.Lottos;
 import lotto.service.LottosGenerator;
 
@@ -15,9 +15,9 @@ public class LottosBothGeneratorImpl implements LottosGenerator {
     }
 
     @Override
-    public Lottos generate(Money money) {
+    public Lottos generate(BuyingPocket pocket) {
         return Lottos.createByBoth(
-                lottosPassiveGenerator.generate(money).get(),
-                lottosRandomGenerator.generate(money).get());
+                lottosPassiveGenerator.generate(pocket).get(),
+                lottosRandomGenerator.generate(pocket).get());
     }
 }

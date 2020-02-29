@@ -1,24 +1,28 @@
 package lotto;
 
-import java.util.List;
-
-import static lotto.Constants.LOTTO_ONE_PRICE;
 import static lotto.Constants.NUMBER_OF_ZERO;
 
 public final class Won implements Money {
-    private int won;
-    private List<String> passiveLottoPapers;
-    private LottoBuyingType lottoBuyingType;
+    private static final Integer LOTTO_ONE_PRICE = 1000;
+    private Integer won;
 
-    public Won(final Integer money, final Integer totalCount, final List<String> passiveLottoPapers) {
-        this.won = money;
-        this.passiveLottoPapers = passiveLottoPapers;
-        this.lottoBuyingType = LottoBuyingType.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
+    private Won(final Integer won) {
+        this.won = won;
     }
 
-    public static Won of(final Integer money, final List<String> passiveLottoPapers){
-        validate(money, passiveLottoPapers.size());
-        return new Won(money, (money / LOTTO_ONE_PRICE), passiveLottoPapers);
+    public static Won from(final Integer won){
+        validate(won);
+        return new Won(won);
+    }
+
+    private static void validate(final Integer won){
+        if(won < NUMBER_OF_ZERO) {
+            throw new IllegalArgumentException("들어온 금액이 음수입니다.");
+        }
+
+        if(won % LOTTO_ONE_PRICE != NUMBER_OF_ZERO){
+            throw new IllegalArgumentException("들어온 금액이 1000원 단위가 아닙니다.");
+        }
     }
 
     @Override
@@ -27,35 +31,12 @@ public final class Won implements Money {
     }
 
     @Override
-    public List<String> getPassiveLottoPapers() {
-        return passiveLottoPapers;
-    }
-
-    @Override
-    public LottoBuyingType getBuyingType() {
-        return lottoBuyingType;
-    }
-
-    private static void validate(final Integer money, final Integer passiveBuyingLottoCount) {
-        if(money < NUMBER_OF_ZERO) {
-            throw new IllegalArgumentException("들어온 금액이 음수입니다.");
-        }
-
-        if(money % LOTTO_ONE_PRICE != NUMBER_OF_ZERO){
-            throw new IllegalArgumentException("들어온 금액이 1000원 단위가 아닙니다.");
-        }
-
-        if(passiveBuyingLottoCount < NUMBER_OF_ZERO) {
-            throw new IllegalArgumentException("수동 구매의 로또 개수가 음수입니다.");
-        }
-
-        if(passiveBuyingLottoCount * LOTTO_ONE_PRICE > money) {
-            throw new IllegalArgumentException("현재 금액으로는 수동번호로 로또를 구매하지 못합니다.");
-        }
-    }
-
-    @Override
     public String toString(){
         return String.valueOf(won);
+    }
+
+    @Override
+    public int getLottoOnePrice(){
+        return LOTTO_ONE_PRICE;
     }
 }

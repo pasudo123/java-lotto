@@ -1,5 +1,8 @@
 package launcher.console;
 
+import lotto.Money;
+import lotto.Won;
+
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -9,7 +12,7 @@ public class InputView {
 
     private static final Scanner SCANNER = new Scanner(System.in);
 
-    public static Integer inputMoney(){
+    public static Money inputMoney(){
         return askPurchaseMoney();
     }
 
@@ -21,9 +24,9 @@ public class InputView {
         return askPurchasePassiveLotto(count);
     }
 
-    private static Integer askPurchaseMoney(){
+    private static Money askPurchaseMoney(){
         System.out.println("구입금액을 입력해주세요.");
-        return SCANNER.nextInt();
+        return Won.from(SCANNER.nextInt());
     }
 
     private static Integer askPurchasePassiveLottoCount(){

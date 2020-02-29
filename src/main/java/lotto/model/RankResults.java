@@ -1,11 +1,10 @@
 package lotto.model;
 
+import lotto.Money;
 import lotto.type.Rank;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static lotto.Constants.LOTTO_ONE_PRICE;
 
 public class RankResults {
 
@@ -22,8 +21,8 @@ public class RankResults {
                 .filter(RankResult::isPrize)
                 .collect(Collectors.toList());
     }
-    public double getRevenue(){
-        return ((double)totalMoneyBuyLottos() / (double)winningMoney()) * PERCENTS_OF_100;
+    public double getRevenue(final Money money){
+        return ((double)totalMoneyBuyLottos(money) / (double)winningMoney()) * PERCENTS_OF_100;
     }
 
     public long countOfRank(final Rank rank){
@@ -32,8 +31,8 @@ public class RankResults {
                 .count();
     }
 
-    private int totalMoneyBuyLottos(){
-        return rankResults.size() * LOTTO_ONE_PRICE;
+    private int totalMoneyBuyLottos(final Money money){
+        return rankResults.size() * money.getLottoOnePrice();
     }
 
     private int winningMoney(){
