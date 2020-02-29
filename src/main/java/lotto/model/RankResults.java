@@ -5,7 +5,7 @@ import lotto.type.Rank;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static lotto.Constants.LOTTO_PRICE;
+import static lotto.Constants.LOTTO_ONE_PRICE;
 
 public class RankResults {
 
@@ -33,7 +33,7 @@ public class RankResults {
     }
 
     private int totalMoneyBuyLottos(){
-        return rankResults.size() * LOTTO_PRICE;
+        return rankResults.size() * LOTTO_ONE_PRICE;
     }
 
     private int winningMoney(){

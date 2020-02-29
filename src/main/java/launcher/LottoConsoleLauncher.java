@@ -35,7 +35,7 @@ public class LottoConsoleLauncher {
         final Money won = Won.of(moneys, passiveLottoPapers);
 
         final Lottos lottos = LottoStore.getMyLottosByMoney(won);
-        final LottoDto lottoDto = new LottoDto(lottos);
+        final LottoDto lottoDto = new LottoDto(lottos, won);
 
         ResultView.printMyLottoCount(lottoDto);
         ResultView.printMyLottoList(lottoDto);
