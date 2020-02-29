@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.type.BuyingType;
+
 import static lotto.Constants.NUMBER_OF_ZERO;
 
 public class LottoBuyingType {
@@ -7,10 +9,6 @@ public class LottoBuyingType {
     private Integer randomCount;
     private Integer passiveCount;
     private BuyingType buyingType;
-
-    public enum BuyingType{
-        RANDOM, PASSIVE, BOTH
-    }
 
     LottoBuyingType(final int randomCount, final int passiveCount, final BuyingType buyingType) {
         this.randomCount = randomCount;
@@ -30,10 +28,6 @@ public class LottoBuyingType {
         }
 
         return new LottoBuyingType(randomCount, passiveCount, BuyingType.BOTH);
-    }
-
-    public static BuyingType[] values() {
-        return BuyingType.values();
     }
 
     public Integer getRandomCount(){

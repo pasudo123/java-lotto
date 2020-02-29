@@ -19,6 +19,11 @@ public final class Lottos {
                 .forEach(i -> lottos.add(Lotto.from(lines.get(i))));
     }
 
+    private Lottos(final List<Lotto> preLottos, final List<Lotto> postLottos) {
+        lottos.addAll(preLottos);
+        lottos.addAll(postLottos);
+    }
+
     public static Lottos createByRandom(final int count){
         validateCount(count);
         return new Lottos(count);
@@ -28,6 +33,12 @@ public final class Lottos {
         validateLines(lines);
         return new Lottos(lines);
 
+    }
+
+    public static Lottos createByBoth(final List<Lotto> preLottos, final List<Lotto> postLottos){
+        assert preLottos != null;
+        assert postLottos != null;
+        return new Lottos(preLottos, postLottos);
     }
 
     private static void validateCount(final int count) {

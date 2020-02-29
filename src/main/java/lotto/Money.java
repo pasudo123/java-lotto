@@ -4,9 +4,9 @@ import java.util.List;
 
 public interface Money {
 
-    public int get();
+    int get();
 
-    public List<String> getPassiveLottoPapers();
+    List<String> getPassiveLottoPapers();
 
-    public LottoBuyingType getBuyingType();
+    LottoBuyingType getBuyingType();
 }
