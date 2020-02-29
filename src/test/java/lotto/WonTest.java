@@ -1,6 +1,5 @@
-package lotto.dto;
+package lotto;
 
-import lotto.Won;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,7 +7,8 @@ import org.junit.jupiter.params.provider.NullAndEmptySource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("돈은")
 class WonTest {
@@ -34,6 +34,15 @@ class WonTest {
         assertTrue(e.getMessage().contains("들어온 금액이 음수 또는 0이기 때문에 로또를 구입할 수 없습니다."));
     }
 
+    @ParameterizedTest(name = "{0}원 금액 입력")
+    @ValueSource(strings = {"1001", "1010", "1100", "11100"})
+    @DisplayName("1000 원 단위로만 들어올 수 있습니다.")
+    void moneyConstructorDivingCheckTest(final String money) {
+
+        Exception e = assertThrows(IllegalArgumentException.class, () -> new Won(money));
+
+        assertTrue(e.getMessage().contains("들어온 금액이 1000원 단위가 아닙니다."));
+    }
 
     @CsvSource({
             "0, 0",
