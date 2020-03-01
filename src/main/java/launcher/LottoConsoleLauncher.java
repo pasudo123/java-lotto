@@ -7,6 +7,7 @@ import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
 import lotto.model.*;
 import lotto.service.LottoResultService;
+import lotto.service.LottoStore;
 
 import java.util.List;
 

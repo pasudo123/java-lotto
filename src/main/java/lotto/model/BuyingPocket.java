@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.LottoBuyingType;
 import lotto.Money;
 
 import java.util.List;
@@ -11,12 +10,12 @@ public class BuyingPocket {
 
     private Money money;
     private List<String> passiveLottoPapers;
-    private LottoBuyingType lottoBuyingType;
+    private BuyingType buyingType;
 
     private BuyingPocket(final Money money, final Integer totalCount, final List<String> passiveLottoPapers) {
         this.money = money;
         this.passiveLottoPapers = passiveLottoPapers;
-        this.lottoBuyingType = LottoBuyingType.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
+        this.buyingType = BuyingType.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
     }
 
     public static BuyingPocket of(final Money money, final List<String> passiveLottoPapers){
@@ -35,14 +34,18 @@ public class BuyingPocket {
     }
 
     public Integer getBuyingLottoCount() {
-        return (lottoBuyingType.getPassiveCount() + lottoBuyingType.getRandomCount()) * money.getLottoOnePrice();
+        return (buyingType.getPassiveCount() + buyingType.getRandomCount()) * money.getLottoOnePrice();
     }
 
     public List<String> getPassiveLottoPapers() {
         return passiveLottoPapers;
     }
 
+    public BuyingType getBuyingType(){
+        return buyingType;
+    }
+
     public Lottos toLottos() {
-        return lottoBuyingType.toLottos(this);
+        return buyingType.toLottos(this);
     }
 }
