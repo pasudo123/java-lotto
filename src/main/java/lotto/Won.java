@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.exception.WonConstructorException;
+
 import static lotto.Constants.NUMBER_OF_ZERO;
 
 public final class Won implements Money {
@@ -16,12 +18,16 @@ public final class Won implements Money {
     }
 
     private static void validate(final Integer won){
-        if(won < NUMBER_OF_ZERO) {
-            throw new IllegalArgumentException("들어온 금액이 음수입니다.");
+        if(won == null){
+            throw new WonConstructorException("들어온 금액이 널입니다.");
+        }
+
+        if(won <= NUMBER_OF_ZERO) {
+            throw new WonConstructorException("들어온 금액이 음수 또는 0 입니다.");
         }
 
         if(won % LOTTO_ONE_PRICE != NUMBER_OF_ZERO){
-            throw new IllegalArgumentException("들어온 금액이 1000원 단위가 아닙니다.");
+            throw new WonConstructorException("들어온 금액이 1000원 단위가 아니기 때문에 로또를 구매할 수 없습니다.");
         }
     }
 

@@ -1,60 +1,49 @@
 package lotto;
 
+import lotto.exception.WonConstructorException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.NullAndEmptySource;
+import org.junit.jupiter.params.provider.NullSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @DisplayName("돈은")
 class WonTest {
 
 
     @ParameterizedTest
-    @NullAndEmptySource
-    @DisplayName("널 또는 공백이 될 수 없습니다.")
-    void moneyConstructorNullOrEmptyCheckTest(final String money){
-
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new Won(money));
-
-        assertTrue(e.getMessage().contains("로또 구입 금액은 널 또는 공백이 될 수 없습니다."));
+    @NullSource
+    @DisplayName("널이 될 수 없습니다.")
+    void moneyConstructorNullOrEmptyCheckTest(final Integer money){
+        assertThrows(WonConstructorException.class, () -> Won.from(money));
     }
 
     @ParameterizedTest(name = "{0}원 금액 입력")
     @ValueSource(strings = {"0", "-1", "-2", "-3"})
     @DisplayName("음수가 들어올 수 없습니다.")
-    void moneyConstructorNegativeCheckTest(final String money) {
-
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new Won(money));
-
-        assertTrue(e.getMessage().contains("들어온 금액이 음수 또는 0이기 때문에 로또를 구입할 수 없습니다."));
+    void moneyConstructorNegativeCheckTest(final Integer money) {
+        assertThrows(WonConstructorException.class, () -> Won.from(money));
     }
 
     @ParameterizedTest(name = "{0}원 금액 입력")
     @ValueSource(strings = {"1001", "1010", "1100", "11100"})
     @DisplayName("1000 원 단위로만 들어올 수 있습니다.")
-    void moneyConstructorDivingCheckTest(final String money) {
-
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new Won(money));
-
-        assertTrue(e.getMessage().contains("들어온 금액이 1000원 단위가 아닙니다."));
+    void moneyConstructorDivingCheckTest(final Integer money) {
+        assertThrows(WonConstructorException.class, () -> Won.from(money));
     }
 
     @CsvSource({
-            "0, 0",
-            "1, 1",
-            "100, 100",
+            "1000, 1000",
             "5000, 5000",
     })
     @ParameterizedTest(name = "{0}원으로 {1}원 생성")
     @DisplayName("생성이 완료되었습니다.")
-    void getWonTest(final String line, final Integer expectedWon) {
+    void getWonTest(final Integer money, final Integer expectedWon) {
 
-        final Won won = new Won(line);
+        final Won won = Won.from(money);
 
         assertThat(won.get()).isEqualTo(expectedWon);
     }
