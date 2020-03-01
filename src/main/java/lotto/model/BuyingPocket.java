@@ -42,7 +42,7 @@ public class BuyingPocket {
         return passiveLottoPapers;
     }
 
-    public LottoBuyingType getBuyingType() {
-        return lottoBuyingType;
+    public Lottos toLottos() {
+        return lottoBuyingType.toLottos(this);
     }
 }

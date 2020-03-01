@@ -7,19 +7,15 @@ import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
 import lotto.model.*;
 import lotto.service.LottoResultService;
-import lotto.service.LottosGenerator;
-import lotto.service.impl.LottosRandomGeneratorImpl;
 
 import java.util.List;
 
 public class LottoConsoleLauncher {
 
     private static final LottoResultService lottoResultService;
-    private static final LottosGenerator lottosGenerator;
 
     static {
         lottoResultService = new LottoResultService();
-        lottosGenerator = new LottosRandomGeneratorImpl();
     }
 
     public static void main(String[] args) {

@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.model.BuyingPocket;
+import lotto.model.Lottos;
 import lotto.type.GenerateType;
 
 import static lotto.Constants.NUMBER_OF_ZERO;
@@ -38,7 +40,7 @@ public class LottoBuyingType {
         return passiveCount;
     }
 
-    public GenerateType getType(){
-        return generateType;
+    public Lottos toLottos(final BuyingPocket pocket){
+        return generateType.generateLottos(pocket);
     }
 }
