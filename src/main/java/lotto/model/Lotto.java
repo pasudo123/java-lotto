@@ -27,8 +27,7 @@ public final class Lotto {
     }
 
     public static Lotto from(final String line){
-        final List<Integer> numbers = Arrays.stream(
-                line.replaceAll(WHITE_SPACE, SPACE).split(COMMA))
+        final List<Integer> numbers = Arrays.stream(line.replaceAll(WHITE_SPACE, SPACE).split(COMMA))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
         LottoValidator.checkNumbers(numbers);
