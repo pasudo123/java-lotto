@@ -38,6 +38,10 @@ public class BuyingType {
         return passiveCount;
     }
 
+    public GenerateType getGenerateType(){
+        return generateType;
+    }
+
     public Lottos toLottos(final BuyingPocket pocket){
         return generateType.generateLottos(pocket);
     }
