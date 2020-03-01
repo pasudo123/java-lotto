@@ -5,6 +5,7 @@ import lotto.exception.WonConstructorException;
 import static lotto.Constants.NUMBER_OF_ZERO;
 
 public final class Won implements Money {
+
     private static final Integer LOTTO_ONE_PRICE = 1000;
     private Integer won;
 
@@ -22,8 +23,8 @@ public final class Won implements Money {
             throw new WonConstructorException("들어온 금액이 널입니다.");
         }
 
-        if(won <= NUMBER_OF_ZERO) {
-            throw new WonConstructorException("들어온 금액이 음수 또는 0 입니다.");
+        if(won < NUMBER_OF_ZERO) {
+            throw new WonConstructorException("들어온 금액이 음수입니다.");
         }
 
         if(won % LOTTO_ONE_PRICE != NUMBER_OF_ZERO){

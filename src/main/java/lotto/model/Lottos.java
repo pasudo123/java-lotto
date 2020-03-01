@@ -15,7 +15,7 @@ public final class Lottos {
     }
 
     private Lottos(final List<String> lines) {
-        IntStream.rangeClosed(1, lines.size())
+        IntStream.range(0, lines.size())
                 .forEach(i -> lottos.add(Lotto.from(lines.get(i))));
     }
 

@@ -35,6 +35,7 @@ public class InputView {
     }
 
     private static List<String> askPurchasePassiveLotto(final int count){
+        SCANNER.nextLine();
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
         return IntStream.rangeClosed(1, count)
                 .mapToObj(i -> SCANNER.nextLine())

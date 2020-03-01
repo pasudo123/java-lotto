@@ -22,7 +22,7 @@ class WonTest {
     }
 
     @ParameterizedTest(name = "{0}원 금액 입력")
-    @ValueSource(strings = {"0", "-1", "-2", "-3"})
+    @ValueSource(strings = {"-1", "-2", "-3"})
     @DisplayName("음수가 들어올 수 없습니다.")
     void moneyConstructorNegativeCheckTest(final Integer money) {
         assertThrows(WonConstructorException.class, () -> Won.from(money));
