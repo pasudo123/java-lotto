@@ -5,7 +5,6 @@ import lotto.service.LottoValidator;
 import java.util.stream.Collectors;
 
 public class WinningLotto {
-
     private final Lotto lotto;
     private final Integer bonusNumber;
 

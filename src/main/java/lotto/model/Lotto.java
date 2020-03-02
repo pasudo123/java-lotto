@@ -1,7 +1,6 @@
 package lotto.model;
 
 import lotto.service.LottoRandomMachine;
-import lotto.service.LottoValidator;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static lotto.Constants.*;
+import static lotto.service.LottoValidator.checkNumbers;
 
 public final class Lotto {
 
@@ -30,7 +30,7 @@ public final class Lotto {
         final List<Integer> numbers = Arrays.stream(line.replaceAll(WHITE_SPACE, SPACE).split(COMMA))
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
-        LottoValidator.checkNumbers(numbers);
+        checkNumbers(numbers);
         return new Lotto(numbers);
     }
 
