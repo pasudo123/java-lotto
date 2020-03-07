@@ -11,13 +11,13 @@ import java.util.stream.Collectors;
 public class LottoDto {
 
     private final List<Lotto> lottos;
-    private final Integer passiveCount;
+    private final Integer manualCount;
     private final Integer randomCount;
 
     public LottoDto(final Lottos lottos, final BuyingPocket pocket){
         this.lottos = new ArrayList<>(lottos.get());
-        this.passiveCount = pocket.getBuyingType().getPassiveCount();
-        this.randomCount = pocket.getBuyingType().getRandomCount();
+        this.manualCount = pocket.getBuyingCount().getManualCount();
+        this.randomCount = pocket.getBuyingCount().getRandomCount();
     }
 
     public List<List<Integer>> getMyLottos(){
@@ -26,8 +26,8 @@ public class LottoDto {
                 .collect(Collectors.toList());
     }
 
-    public Integer getPassiveCount(){
-        return this.passiveCount;
+    public Integer getManualCount(){
+        return this.manualCount;
     }
 
     public Integer getRandomCount() {

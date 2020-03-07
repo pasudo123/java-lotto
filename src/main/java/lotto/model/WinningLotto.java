@@ -21,7 +21,6 @@ public class WinningLotto {
     }
 
     private void postValidateCheck(){
-        LottoValidator.checkNumbers(lotto.getNumbers());
         LottoValidator.checkOverlap(lotto.getNumbers(), bonusNumber);
     }
 

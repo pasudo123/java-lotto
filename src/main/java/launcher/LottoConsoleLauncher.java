@@ -5,9 +5,11 @@ import launcher.console.ResultView;
 import lotto.Money;
 import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
-import lotto.model.*;
+import lotto.model.BuyingPocket;
+import lotto.model.Lottos;
+import lotto.model.RankResults;
+import lotto.model.WinningLotto;
 import lotto.service.LottoResultService;
-import lotto.service.LottoStore;
 
 import java.util.List;
 
@@ -27,7 +29,7 @@ public class LottoConsoleLauncher {
 
         final BuyingPocket pocket = BuyingPocket.of(money, passiveLottoPapers);
 
-        final Lottos lottos = LottoStore.getMyLottosByMoney(pocket);
+        final Lottos lottos = Lottos.create(pocket);
         final LottoDto lottoDto = new LottoDto(lottos, pocket);
 
         ResultView.printMyLottoCount(lottoDto);

@@ -1,6 +1,5 @@
 package lotto.model;
 
-import lotto.type.GenerateType;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayName("내가 구매한 로또 유형은")
-class BuyingTypeTest {
+class BuyingCountTest {
 
     @ParameterizedTest
     @CsvSource({
@@ -17,13 +16,13 @@ class BuyingTypeTest {
         "15, 15"
     })
     @DisplayName("수동로또만 구매한 유형이다.")
-    public void createBuyingPassiveTypeTest(final int totalCount, final int passiveCount){
+    public void createBuyingPassiveTypeTest(final int totalCount, final int manualCount){
 
         // when
-        final BuyingType buyingType = BuyingType.createBuyingTypeByCounts(totalCount, passiveCount);
+        final BuyingCount buyingCount = BuyingCount.createBuyingTypeByCounts(totalCount, manualCount);
 
         // then
-        assertThat(buyingType.getGenerateType()).isEqualTo(GenerateType.PASSIVE);
+        assertThat(buyingCount.getManualCount()).isEqualTo(manualCount);
     }
 
     @ParameterizedTest
@@ -34,13 +33,13 @@ class BuyingTypeTest {
 
     })
     @DisplayName("랜덤로또만 구매한 유형이다.")
-    public void createBuyingRandomTypeTest(final int totalCount, final int passiveCount) {
+    public void createBuyingRandomTypeTest(final int totalCount, final int manualCount) {
 
         // when
-        final BuyingType buyingType = BuyingType.createBuyingTypeByCounts(totalCount, passiveCount);
+        final BuyingCount buyingCount = BuyingCount.createBuyingTypeByCounts(totalCount, manualCount);
 
         // then
-        assertThat(buyingType.getGenerateType()).isEqualTo(GenerateType.RANDOM);
+        assertThat(buyingCount.getManualCount()).isEqualTo(manualCount);
     }
 
     @ParameterizedTest
@@ -50,12 +49,12 @@ class BuyingTypeTest {
         "15, 8"
     })
     @DisplayName("수동과 랜덤로또 둘 다 구매한 유형이다.")
-    public void createBuyingBothTypeTest(final int totalCount, final int passiveCount) {
+    public void createBuyingBothTypeTest(final int totalCount, final int manualCount) {
 
         // when
-        final BuyingType buyingType = BuyingType.createBuyingTypeByCounts(totalCount, passiveCount);
+        final BuyingCount buyingCount = BuyingCount.createBuyingTypeByCounts(totalCount, manualCount);
 
         // then
-        assertThat(buyingType.getGenerateType()).isEqualTo(GenerateType.BOTH);
+        assertThat(buyingCount.getManualCount()).isEqualTo(manualCount);
     }
 }

@@ -8,11 +8,11 @@ import java.util.List;
 public class BuyingPocket {
 
     private List<String> passiveLottoPapers;
-    private BuyingType buyingType;
+    private BuyingCount buyingCount;
 
     private BuyingPocket(final Integer totalCount, final List<String> passiveLottoPapers) {
         this.passiveLottoPapers = passiveLottoPapers;
-        this.buyingType = BuyingType.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
+        this.buyingCount = BuyingCount.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
     }
 
     public static BuyingPocket of(final Money money, final List<String> passiveLottoPapers){
@@ -34,11 +34,7 @@ public class BuyingPocket {
         return passiveLottoPapers;
     }
 
-    public BuyingType getBuyingType(){
-        return buyingType;
-    }
-
-    public Lottos toLottos() {
-        return buyingType.toLottos(this);
+    public BuyingCount getBuyingCount(){
+        return buyingCount;
     }
 }

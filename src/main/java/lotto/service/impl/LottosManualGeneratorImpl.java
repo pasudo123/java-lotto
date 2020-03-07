@@ -4,10 +4,10 @@
 //import lotto.model.Lottos;
 //import lotto.service.LottosGenerator;
 //
-//public class LottosRandomGeneratorImpl implements LottosGenerator {
+//public class LottosManualGeneratorImpl implements LottosGenerator {
 //
 //    @Override
 //    public Lottos generate(final BuyingPocket pocket) {
-//        return Lottos.createByRandom(pocket.getBuyingType().getRandomCount());
+//        return Lottos.createByPassive(pocket.getPassiveLottoPapers());
 //    }
 //}
