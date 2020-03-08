@@ -2,9 +2,8 @@ package launcher.console;
 
 import lotto.Money;
 import lotto.Won;
+import lotto.model.ManualLottoPapers;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -21,8 +20,8 @@ public class InputView {
         return askPurchasePassiveLottoCount();
     }
 
-    public static List<String> inputPassiveLotto(final int count) {
-        return askPurchasePassiveLotto(count);
+    public static ManualLottoPapers inputManualLotto(final int count) {
+        return askPurchaseManualLotto(count);
     }
 
     private static Money askPurchaseMoney(){
@@ -37,12 +36,14 @@ public class InputView {
         return count;
     }
 
-    private static List<String> askPurchasePassiveLotto(final int count){
-        if(count == 0) { return Collections.emptyList();}
+    private static ManualLottoPapers askPurchaseManualLotto(final int count){
+        if(count == 0) { return ManualLottoPapers.empty();}
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
-        return IntStream.rangeClosed(1, count)
+        return ManualLottoPapers.from(
+                IntStream.rangeClosed(1, count)
                 .mapToObj(i -> SCANNER.nextLine())
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
     }
 
     public static String inputPrevWeekLottoNumber(){

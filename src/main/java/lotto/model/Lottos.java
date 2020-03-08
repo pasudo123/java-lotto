@@ -9,34 +9,34 @@ public final class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    private Lottos(final int count){
+    private Lottos (final BuyingPocket pocket) {
+        assert pocket != null;
+        addManualLottos(pocket);
+        addAutoLottos(pocket);
+    }
+
+    private void addAutoLottos(final BuyingPocket pocket){
+        final int count = pocket.getAutoLottoCount();
         IntStream.rangeClosed(1, count)
                 .forEach(i -> lottos.add(Lotto.create()));
     }
 
-    private Lottos(final List<String> lines) {
-        IntStream.range(0, lines.size())
-                .forEach(i -> lottos.add(Lotto.from(lines.get(i))));
+    private void addManualLottos(final BuyingPocket pocket) {
+        final List<String> manualLottoPapers = pocket.getManualLottoPapers();
+        IntStream.range(0, manualLottoPapers.size())
+                .forEach(i -> lottos.add(Lotto.from(manualLottoPapers.get(i))));
     }
 
     public static Lottos create(final BuyingPocket buyingPocket){
-        Lottos manualLottos = new Lottos(buyingPocket.getPassiveLottoPapers());
-        Lottos autoLottos = new Lottos(buyingPocket.getBuyingCount().getRandomCount());
-
-        return null;
+        validate(buyingPocket);
+        return new Lottos(buyingPocket);
     }
 
-//    private static void validateCount(final int count) {
-//        if(count <= 0) {
-//            throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
-//        }
-//    }
-//
-//    private static void validateLines(final List<String> lines) {
-//        if(lines == null || lines.size() <= 0) {
-//            throw new IllegalArgumentException("로또를 생성할 수 없습니다.");
-//        }
-//    }
+    private static void validate(final BuyingPocket buyingPocket) {
+        if(buyingPocket == null) {
+            throw new IllegalArgumentException("현재 로또를 생성할 주머니가 널입니다.");
+        }
+    }
 
     public int getCount(){
         return lottos.size();

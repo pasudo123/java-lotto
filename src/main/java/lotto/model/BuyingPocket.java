@@ -1,40 +1,38 @@
 package lotto.model;
 
-import lotto.Money;
 import lotto.exception.BuyingPocketException;
 
+import java.util.Collections;
 import java.util.List;
 
 public class BuyingPocket {
 
-    private List<String> passiveLottoPapers;
-    private BuyingCount buyingCount;
+    private BuyingInfo buyingInfo;
+    private ManualLottoPapers manualLottoPapers;
 
-    private BuyingPocket(final Integer totalCount, final List<String> passiveLottoPapers) {
-        this.passiveLottoPapers = passiveLottoPapers;
-        this.buyingCount = BuyingCount.createBuyingTypeByCounts(totalCount, passiveLottoPapers.size());
+    private BuyingPocket(final BuyingInfo buyingInfo, final ManualLottoPapers manualLottoPapers) {
+        assert buyingInfo != null;
+        assert manualLottoPapers != null;
+        this.buyingInfo = buyingInfo;
+        this.manualLottoPapers = manualLottoPapers;
     }
 
-    public static BuyingPocket of(final Money money, final List<String> passiveLottoPapers){
-        validate(money, passiveLottoPapers);
-        return new BuyingPocket((money.get() / money.getLottoOnePrice()), passiveLottoPapers);
+    public static BuyingPocket of(final BuyingInfo buyingInfo, final ManualLottoPapers manualLottoPapers){
+        validate(buyingInfo, manualLottoPapers);
+        return new BuyingPocket(buyingInfo, manualLottoPapers);
     }
 
-    private static void validate(final Money money, final List<String> passiveLottoPapers) {
-        if(passiveLottoPapers == null) {
-            throw new BuyingPocketException("수동로또의 개수가 없습니다.");
-        }
-
-        if(passiveLottoPapers.size() * money.getLottoOnePrice() > money.get()) {
-            throw new BuyingPocketException("수동로또의 개수가 구매 금액을 초과합니다.");
+    private static void validate(final BuyingInfo buyingInfo, final ManualLottoPapers manualLottoPapers) {
+        if(buyingInfo == null || manualLottoPapers == null) {
+            throw new BuyingPocketException("현재 주머니에는 널값으로 아무것도 없습니다.");
         }
     }
 
-    public List<String> getPassiveLottoPapers() {
-        return passiveLottoPapers;
+    public List<String> getManualLottoPapers(){
+        return Collections.unmodifiableList(manualLottoPapers.getManualLottoPapers());
     }
 
-    public BuyingCount getBuyingCount(){
-        return buyingCount;
+    public int getAutoLottoCount(){
+        return buyingInfo.getAutoLottoBuyingCount();
     }
 }

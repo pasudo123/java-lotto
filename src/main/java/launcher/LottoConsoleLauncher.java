@@ -5,13 +5,8 @@ import launcher.console.ResultView;
 import lotto.Money;
 import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
-import lotto.model.BuyingPocket;
-import lotto.model.Lottos;
-import lotto.model.RankResults;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 import lotto.service.LottoResultService;
-
-import java.util.List;
 
 public class LottoConsoleLauncher {
 
@@ -24,11 +19,12 @@ public class LottoConsoleLauncher {
     public static void main(String[] args) {
 
         final Money money = InputView.inputMoney();
-        final Integer passiveCount = InputView.inputPassiveLottoCount();
-        final List<String> passiveLottoPapers = InputView.inputPassiveLotto(passiveCount);
+        final int manualLottoCount = InputView.inputPassiveLottoCount();
 
-        final BuyingPocket pocket = BuyingPocket.of(money, passiveLottoPapers);
+        final BuyingInfo buyingInfo = BuyingInfo.of(money, manualLottoCount);
+        final ManualLottoPapers manualLottoPapers = InputView.inputManualLotto(manualLottoCount);
 
+        final BuyingPocket pocket = BuyingPocket.of(buyingInfo, manualLottoPapers);
         final Lottos lottos = Lottos.create(pocket);
         final LottoDto lottoDto = new LottoDto(lottos, pocket);
 
