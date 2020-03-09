@@ -16,8 +16,8 @@ public class LottoDto {
 
     public LottoDto(final Lottos lottos, final BuyingPocket pocket){
         this.lottos = new ArrayList<>(lottos.get());
-        this.manualCount = pocket.getBuyingCount().getManualCount();
-        this.randomCount = pocket.getBuyingCount().getRandomCount();
+        this.manualCount = pocket.getManualLottoPapers().size();
+        this.randomCount = pocket.getAutoLottoCount();
     }
 
     public List<List<Integer>> getMyLottos(){
