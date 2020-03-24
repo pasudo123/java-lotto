@@ -12,6 +12,7 @@ import lotto.model.BuyingPocket;
 import lotto.model.Lottos;
 import lotto.model.ManualLottoPapers;
 import spark.ModelAndView;
+import spark.Session;
 import spark.template.handlebars.HandlebarsTemplateEngine;
 
 import java.util.Arrays;
@@ -40,7 +41,6 @@ public class WebMain {
     public static void main(String[]args){
 
         get("/", (request, response) -> {
-            request.session(true);
             return render(new HashMap<>(), "index.html");
         });
 
@@ -68,17 +68,13 @@ public class WebMain {
 
         post("/matchLotto", (request, response) -> {
 
-            final Money money = request.attribute(MONEY);
-            final Lottos lottos = request.attribute(LOTTOS);
+            Session session = request.session(true);
+            final Money money = session.attribute(MONEY);
+            final Lottos lottos = session.attribute(LOTTOS);
             final String winningNumber = request.queryParams("winningNumber");
             final Integer bonusNumber = Integer.parseInt(request.queryParams("bonusNumber"));
 
-            WinningLottoDto winningLottoDto = lottoMatchService.getMyWinningLottos(money, lottos, winningNumber, bonusNumber);
-
-            Map<String, Object> model = new HashMap<>();
-            model.put("winningLotto", winningLottoDto);
-
-            return render(model, "result.html");
+            return render(lottoMatchService.getMyWinningLottos(money, lottos, winningNumber, bonusNumber), "result.html");
         });
     }
 
