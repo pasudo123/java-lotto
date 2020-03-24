@@ -1,40 +1,65 @@
 package lotto.model;
 
-import org.junit.jupiter.api.BeforeEach;
+import lotto.exception.LottoCreateException;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import java.util.HashSet;
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 @DisplayName("로또는")
 class LottoTest {
 
-    private Lotto lotto = null;
-
-    @BeforeEach
-    void initLotto(){
-        this.lotto = Lotto.create();
-    }
-
     @Test
-    @DisplayName("로또번호를 생성한다")
+    @DisplayName("로또번호를 자동으로 생성하고 여섯자리 번호를 반환한다.")
     void createTest() {
-        assertThat(lotto.getNumbers().size()).isNotZero();
-    }
+        // when
+        Lotto lotto = Lotto.create();
 
-    @Test
-    @DisplayName("여섯자리 로또번호를 반환횐다")
-    void getNumbersTest() {
-        // when & then
+        // then
+        assertThat(lotto.getNumbers().size()).isNotZero();
         assertThat(lotto.getNumbers().size()).isEqualTo(6);
     }
 
-    @RepeatedTest(value = 500, name ="중복로또는 생성하지 않음 : {currentRepetition}/{totalRepetitions}")
-    @DisplayName("중복된 로또번호는 생성하지 않는다.")
-    void doNotOverlapCreateTest(){
-        assertThat(new HashSet<>(lotto.getNumbers()).size()).isEqualTo(6);
+    @ParameterizedTest
+    @CsvSource({
+        "'1, 2, 3, 4, 5, 6', '[1, 2, 3, 4, 5, 6]'",
+        "'1, 10, 15, 20, 25, 30', '[1, 10, 15, 20, 25, 30]'",
+    })
+    @DisplayName("로또번호를 수동으로 생성한다.")
+    void fromTest(final String line, final String expectedLine){
+        // when
+        Lotto lotto = Lotto.from(line);
+
+        // then
+        assertThat(Arrays.toString(
+                lotto.getNumbers().toArray()
+        )).isEqualTo(expectedLine);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+        "'1, 1, 2, 3, 4, 5'",
+    })
+    @DisplayName("수동입력한 로또번호가 중복되면 에러가 발생한다.")
+    void fromExceptionTestOnOverlap(final String line) {
+        // when & then
+        assertThatThrownBy(() -> Lotto.from(line))
+                .isInstanceOf(LottoCreateException.class);
+    }
+
+    @ParameterizedTest
+    @CsvSource({
+            "'1, 2, 3, 4, 5'",
+    })
+    @DisplayName("수동입력한 로또번호의 개수가 부족하면 에러가 발생한다.")
+    void fromExceptionTestOnSize(final String line) {
+        // when & then
+        assertThatThrownBy(() -> Lotto.from(line))
+                .isInstanceOf(LottoCreateException.class);
     }
 }

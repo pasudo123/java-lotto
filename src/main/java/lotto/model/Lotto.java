@@ -2,8 +2,13 @@ package lotto.model;
 
 import lotto.service.LottoRandomMachine;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static lotto.Constants.*;
+import static lotto.service.LottoValidator.checkNumbers;
 
 public final class Lotto {
 
@@ -13,8 +18,20 @@ public final class Lotto {
         this.numbers = LottoRandomMachine.generate();
     }
 
+    private Lotto(final List<Integer> numbers) {
+        this.numbers = numbers;
+    }
+
     public static Lotto create() {
         return new Lotto();
+    }
+
+    public static Lotto from(final String line){
+        final List<Integer> numbers = Arrays.stream(line.replaceAll(WHITE_SPACE, SPACE).split(COMMA))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
+        checkNumbers(numbers);
+        return new Lotto(numbers);
     }
 
     private int getMatchCountByWinningNumbers(final List<Integer> winningNumbers) {

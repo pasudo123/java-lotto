@@ -8,12 +8,12 @@ import java.util.*;
 
 public enum Rank {
 
-    FIRST(1, MatchType.of(6, false), new Won("200000000")),
-    SECOND(2, MatchType.of( 5, true), new Won("30000000")),
-    THIRD(3, MatchType.of(5, false), new Won("20000000")),
-    FOURTH(4, MatchType.of(4, false), new Won("50000")),
-    FIFTH(5, MatchType.of(3, false), new Won("10000")),
-    MISS(6, MatchType.of(0, false), new Won("0"));
+    FIRST(1, MatchType.of(6, false), Won.from(200000000)),
+    SECOND(2, MatchType.of( 5, true), Won.from(30000000)),
+    THIRD(3, MatchType.of(5, false), Won.from(20000000)),
+    FOURTH(4, MatchType.of(4, false), Won.from(50000)),
+    FIFTH(5, MatchType.of(3, false), Won.from(10000)),
+    MISS(6, MatchType.of(0, false), Won.from(0));
 
     private Integer ranking;
     private MatchType matchType;

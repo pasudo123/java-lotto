@@ -5,28 +5,28 @@ import launcher.console.ResultView;
 import lotto.Money;
 import lotto.dto.LottoDto;
 import lotto.dto.WinningLottoDto;
-import lotto.model.Lottos;
-import lotto.model.RankResults;
-import lotto.model.WinningLotto;
+import lotto.model.*;
 import lotto.service.LottoResultService;
-import lotto.service.LottosGenerator;
-import lotto.service.impl.LottosWonGeneratorImpl;
 
 public class LottoConsoleLauncher {
 
     private static final LottoResultService lottoResultService;
-    private static final LottosGenerator lottosGenerator;
 
     static {
         lottoResultService = new LottoResultService();
-        lottosGenerator = new LottosWonGeneratorImpl();
     }
 
     public static void main(String[] args) {
 
         final Money money = InputView.inputMoney();
-        final Lottos lottos = lottosGenerator.generate(money);
-        final LottoDto lottoDto = new LottoDto(lottos);
+        final int manualLottoCount = InputView.inputPassiveLottoCount();
+
+        final BuyingInfo buyingInfo = BuyingInfo.of(money, manualLottoCount);
+        final ManualLottoPapers manualLottoPapers = InputView.inputManualLotto(manualLottoCount);
+
+        final BuyingPocket pocket = BuyingPocket.of(buyingInfo, manualLottoPapers);
+        final Lottos lottos = Lottos.create(pocket);
+        final LottoDto lottoDto = new LottoDto(lottos, pocket);
 
         ResultView.printMyLottoCount(lottoDto);
         ResultView.printMyLottoList(lottoDto);
@@ -36,7 +36,7 @@ public class LottoConsoleLauncher {
 
         final WinningLotto winningLotto = new WinningLotto(line, bonusNumber);
         final RankResults rankResults = winningLotto.getRankResults(lottos);
-        final WinningLottoDto winningLottoDto = lottoResultService.getWinningLottoByResults(rankResults);
+        final WinningLottoDto winningLottoDto = lottoResultService.getWinningLottoByResults(money, rankResults);
 
         ResultView.printWinning(winningLottoDto);
     }

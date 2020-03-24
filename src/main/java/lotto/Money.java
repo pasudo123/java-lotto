@@ -2,6 +2,7 @@ package lotto;
 
 public interface Money {
 
-    public int get();
+    int get();
 
+    int getLottoOnePrice();
 }

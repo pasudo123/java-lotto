@@ -1,5 +1,6 @@
 package lotto.model;
 
+import lotto.exception.LottoCreateException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -30,12 +31,7 @@ class WinningLottoTest {
     @NullAndEmptySource
     @DisplayName("널 또는 공백이 입력되어서 에러가 발생하였습니다.")
     void constructorNullAndEmptyExceptionTest(final String line) {
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, 5));
-
-        // then
-        assertTrue(e.getMessage().contains("지난 주 당첨 번호에 널 또는 공백이 입력되었습니다."));
+        assertThrows(LottoCreateException.class, () -> new WinningLotto(line, 5));
     }
 
     @ParameterizedTest(name = "[{0}] + [{1}] -> {2}개")
@@ -47,12 +43,7 @@ class WinningLottoTest {
     })
     @DisplayName("더 많은 로또번호 개수가 입력되어서 에러가 발생하였습니다.")
     void constructorLottoSizeExceptionTest(final String line, final Integer bonusNumber, final Integer size) {
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
-
-        // then
-        assertTrue(e.getMessage().contains("지난 주 당첨 번호는 여섯개의 숫자가 입력되어야 합니다."));
+       assertThrows(LottoCreateException.class, () -> new WinningLotto(line, bonusNumber));
     }
 
     @ParameterizedTest(name = "[{0}] 입력, 보너스 번호[{1}], {2} 발견")
@@ -64,12 +55,7 @@ class WinningLottoTest {
     @DisplayName("로또번호의 범위를 벗어났기 때문에 에러가 발생하였습니다.")
 
     void constructorLottoRangeExceptionTest(final String line, final Integer bonusNumber, final Integer notLottoNumber) {
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
-
-        // then
-        assertTrue(e.getMessage().contains("지난 주 당첨 번호는 로또 범위를 벗어났습니다."));
+        assertThrows(LottoCreateException.class, () -> new WinningLotto(line, bonusNumber));
     }
 
     @ParameterizedTest(name = "[{0}] 입력, 보너스 번호[{1}], {1} 중복")
@@ -80,12 +66,7 @@ class WinningLottoTest {
     })
     @DisplayName("로또번호에 동일한 숫자가 입력되었기 때문에 에러가 발생하였습니다.")
     void constructorOverlapExceptionTest(final String line, final Integer bonusNumber, final Integer overlapNumber){
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
-
-        // then
-        assertTrue(e.getMessage().contains("지난 주 당첨 번호에 동일한 숫자가 입력되었습니다."));
+        assertThrows(LottoCreateException.class, () -> new WinningLotto(line, bonusNumber));
     }
 
     @ParameterizedTest(name = "보너스 번호[{1}] 입력이후 에러발생")
@@ -96,12 +77,7 @@ class WinningLottoTest {
     })
     @DisplayName("보너스 번호가 로또 범위를 벗어났기 때문에 에러가 발생하였습니다.")
     void constructorBonusNumberNegativeExceptionTest(final String line, final Integer bonusNumber){
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
-
-        // then
-        assertTrue(e.getMessage().contains("보너스 번호는 로또 범위를 벗어났습니다."));
+        assertThrows(LottoCreateException.class, () -> new WinningLotto(line, bonusNumber));
     }
 
     @ParameterizedTest(name = "[{0}] 입력, 보너스 번호[{1}] -> {2} 번호 일치")
@@ -112,11 +88,6 @@ class WinningLottoTest {
     })
     @DisplayName("로또 번호와 보너스 번호가 중복되기 때문에 에러가 발생하였습니다.")
     void constructorBonumNumberOverlapExceptionTest(final String line, final Integer bonusNumber, final Integer overlapNumber) {
-
-        // when
-        Exception e = assertThrows(IllegalArgumentException.class, () -> new WinningLotto(line, bonusNumber));
-
-        // then
-        assertTrue(e.getMessage().contains("로또 번호안에 보너스 번호가 한개 더 있습니다. 확인해주시길 바랍니다."));
+        assertThrows(LottoCreateException.class, () -> new WinningLotto(line, bonusNumber));
     }
 }

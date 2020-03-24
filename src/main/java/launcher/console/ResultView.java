@@ -38,8 +38,10 @@ public class ResultView {
                 ranks.get(rank)));
     }
 
-    public static void printMyLottoCount(final LottoDto adapter) {
-        System.out.println(adapter.getLottoCount() + "개를 구매했습니다.");
+    public static void printMyLottoCount(final LottoDto lottoDto) {
+        System.out.println(String.format("수동으로 %d장, 자동으로 %d장을 구매했습니다.",
+                lottoDto.getManualCount(),
+                lottoDto.getRandomCount()));
     }
 
     public static void printMyLottoList(final LottoDto adapter){
