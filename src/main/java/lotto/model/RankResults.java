@@ -3,6 +3,7 @@ package lotto.model;
 import lotto.Money;
 import lotto.type.Rank;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,8 +22,9 @@ public class RankResults {
                 .filter(RankResult::isPrize)
                 .collect(Collectors.toList());
     }
-    public double getRevenue(final Money money){
-        return ((double)totalMoneyBuyLottos(money) / (double)winningMoney()) * PERCENTS_OF_100;
+    public String getRevenue(final Money money){
+        double value = ((double)totalMoneyBuyLottos(money) / (double)winningMoney()) * PERCENTS_OF_100;
+        return BigDecimal.valueOf(value).toPlainString();
     }
 
     public long countOfRank(final Rank rank){

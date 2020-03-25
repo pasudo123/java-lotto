@@ -1,12 +1,10 @@
 package launcher.web;
 
 import launcher.web.config.WebConfiguration;
-import launcher.web.service.LottoBuyService;
 import launcher.web.service.LottoMatchService;
 import lotto.Money;
 import lotto.Won;
 import lotto.dto.LottoDto;
-import lotto.dto.WinningLottoDto;
 import lotto.model.BuyingInfo;
 import lotto.model.BuyingPocket;
 import lotto.model.Lottos;
@@ -26,7 +24,6 @@ import static spark.Spark.post;
 public class WebMain {
 
     private static WebConfiguration webConfiguration;
-    private static LottoBuyService lottoBuyService;
     private static LottoMatchService lottoMatchService;
 
     private static final String MONEY = "money";
@@ -34,7 +31,6 @@ public class WebMain {
 
     static {
         webConfiguration = new WebConfiguration();
-        lottoBuyService = new LottoBuyService();
         lottoMatchService = new LottoMatchService();
     }
 

@@ -56,7 +56,6 @@ body {
 	font-size: 16px;
 }
 </style>
-
 </head>
 <body>
 
@@ -67,29 +66,23 @@ body {
 	</div>
 </form>
 <pre class="pre-scrollable">
-	<script id="text-template" type="text/x-handlebars-template">
 	<table class="table">
 			<thead>
 				<th><h3 class="text-center">당첨 통계</h3></th>
 			</thead>
 		<tbody>
 		{{#each ranks}}
-			{{#if isBonus}}
 			<tr>
-				<th>{{matchCount}} 개 일치 보너스 볼 일치({{money}}원) - {{count}}개</th>
+				<th>
+					{{matchCount}} 개 일치{{#if bonus}},보너스 볼 일치{{/if}} ({{money}}원) - {{count}}개
+				</th>
 			</tr>
-			{{else}}
-			<tr>
-				<th>{{matchCount}} 개 일치 ({{money}}원) - {{count}}개</th>
-			</tr>
-			{{/if}}
 		{{/each}}
 		</tbody>
 		<tfoot>
 			<th><h4 class="text-center">총 수익률은 {{revenue}}%입니다.</h4></th>
 		</tfoot>
 	</table>
-	</script>
 </pre>
 </body>
 </html>

@@ -8,7 +8,7 @@ import lotto.type.Rank;
 public class LottoResultService {
 
     public WinningLottoDto getWinningLottoByResults(final Money money, final RankResults rankResults){
-        final double revenue = rankResults.getRevenue(money);
+        final String revenue = rankResults.getRevenue(money);
         return new WinningLottoDto(revenue, Rank.toCountOfRank(rankResults));
     }
 }

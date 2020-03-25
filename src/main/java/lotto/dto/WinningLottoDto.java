@@ -6,15 +6,15 @@ import java.util.Map;
 
 public class WinningLottoDto {
 
-    private double revenue;
+    private String revenue;
     private Map<Rank, Long> ranks;
 
-    public WinningLottoDto(final double revenue, final Map<Rank, Long> ranks){
+    public WinningLottoDto(final String revenue, final Map<Rank, Long> ranks){
         this.revenue = revenue;
         this.ranks = ranks;
     }
 
-    public double getRevenue(){
+    public String getRevenue(){
         return revenue;
     }
 
